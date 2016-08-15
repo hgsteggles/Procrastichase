@@ -7,6 +7,7 @@ import com.badlogic.gdx.Game;
 import hgs.tombstone.components.*;
 import hgs.tombstone.elements.Enums;
 import hgs.tombstone.elements.GameParameters;
+import hgs.tombstone.elements.GameSettings;
 import hgs.tombstone.world.ComponentFactory;
 import hgs.tombstone.world.World;
 
@@ -16,7 +17,10 @@ import hgs.tombstone.world.World;
 public class MusicSystem extends IteratingSystem implements EntityListener {
 	public MusicSystem() {
 		super(Family.all(MusicComponent.class).get());
+		soundOn = GameSettings.isSoundOn();
 	}
+
+	private boolean soundOn;
 
 	@Override
 	public void removedFromEngine(Engine engine) {
@@ -26,8 +30,20 @@ public class MusicSystem extends IteratingSystem implements EntityListener {
 	}
 
 	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+
+		soundOn = GameSettings.isSoundOn();
+	}
+
+	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 		MusicComponent musicComp = ComponentMappers.music.get(entity);
+
+		if (!soundOn)
+			musicComp.music.mute();
+		else
+			musicComp.music.unmute();
 
 		if (musicComp.control == Enums.MusicControlType.FADEIN) {
 			float vol = musicComp.music.getVolume() + 1.0f * deltaTime;

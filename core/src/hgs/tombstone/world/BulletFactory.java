@@ -144,7 +144,8 @@ public class BulletFactory {
 		}
 		entity.add(moveComp);
 
-		entity.add(new BoundsComponent());
+		BoundsComponent boundsComp = new BoundsComponent();
+		entity.add(boundsComp);
 
 		if (type == BulletType.TRON_DELAY
 				|| type == BulletType.TRON_UP
@@ -162,13 +163,28 @@ public class BulletFactory {
 			entity.add(ParticleFactory.createTrailEmitter(0, -1.0f));
 		}
 		else if (type == BulletType.MILK) {
-			entity.add(ParticleFactory.createMilkEmitter());
+			boundsComp.onEnter = new EventInterface() {
+				@Override
+				public void dispatchEvent(Entity e) {
+					e.add(ParticleFactory.createMilkEmitter());
+				}
+			};
 		}
 		else if (type == BulletType.BEER) {
-			entity.add(ParticleFactory.createBeerEmitter());
+			boundsComp.onEnter = new EventInterface() {
+				@Override
+				public void dispatchEvent(Entity e) {
+					e.add(ParticleFactory.createBeerEmitter());
+				}
+			};
 		}
 		else if (type == BulletType.FIREBALL) {
-			entity.add(ParticleFactory.createFireballEmitter());
+			boundsComp.onEnter = new EventInterface() {
+				@Override
+				public void dispatchEvent(Entity e) {
+					e.add(ParticleFactory.createFireballEmitter());
+				}
+			};
 		}
 		else if (type == BulletType.PIZZA) {
 			entity.add(ParticleFactory.createPepperoniEmitter());

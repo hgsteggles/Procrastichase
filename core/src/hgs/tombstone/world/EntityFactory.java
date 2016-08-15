@@ -325,7 +325,7 @@ public class EntityFactory {
 	}
 
 	public static Entity createTableSimon(float posX) {
-		Entity entity = createFloorObject(posX, GameArt.tableSimon);
+		final Entity entity = createFloorObject(posX, GameArt.tableSimon);
 
 		CollisionComponent collComp = ComponentMappers.collision.get(entity);
 		collComp.rect.setY(collComp.rect.getY() + 0.40f * collComp.rect.getHeight());
@@ -335,7 +335,15 @@ public class EntityFactory {
 		//entity.add(new PeeComponent());
 		entity.add(ParticleFactory.createPeeEmitter());
 		entity.add(new DisableComponent());
-		entity.add(new BoundsComponent());
+
+		BoundsComponent boundsComp = new BoundsComponent();
+		boundsComp.onEnter = new EventInterface() {
+			@Override
+			public void dispatchEvent(Entity e) {
+				e.add(ParticleFactory.createPeeEmitter());
+			}
+		};
+		entity.add(boundsComp);
 
 		return entity;
 	}
@@ -405,7 +413,7 @@ public class EntityFactory {
 		return entity;
 	}
 
-	public static Entity createAbi(float posX) {
+	public static Entity createAbi(final float posX) {
 		Entity entity = createFloorObject(posX, GameArt.abi);
 
 		CollisionComponent collComp = ComponentMappers.collision.get(entity);
@@ -413,7 +421,14 @@ public class EntityFactory {
 		collComp.type = Enums.CollisionType.ENEMY;
 
 		//entity.add(new PeeComponent());
-		entity.add(ParticleFactory.createSleepEmitter(posX));
+		BoundsComponent boundsComp = new BoundsComponent();
+		boundsComp.onEnter = new EventInterface() {
+			@Override
+			public void dispatchEvent(Entity e) {
+				e.add(ParticleFactory.createSleepEmitter(posX));
+			}
+		};
+
 		entity.add(new DisableComponent());
 
 		return entity;

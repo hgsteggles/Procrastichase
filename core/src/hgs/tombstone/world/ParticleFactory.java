@@ -151,9 +151,10 @@ public class ParticleFactory {
 		emitComp.sourceRect.setSize(0.02f, 0.02f);
 		emitComp.sourceRect.setCenter(0.0f, 0.0f);
 		emitComp.sourceRotation = 0.0f;
+		emitComp.angularRange = 0f;
 
 		emitComp.intermittency = 0.01f;
-		emitComp.lifetime = 2f;
+		emitComp.lifetime = 2.0f;
 		emitComp.rate = 40f;
 		emitComp.nextDrop = 0.1f;
 
@@ -189,7 +190,7 @@ public class ParticleFactory {
 		emitComp.texsize.set(texW, texH);
 
 		emitComp.velocity.set(-1.0f, 2.0f);
-		emitComp.angularRange = 2f;
+		emitComp.angularRange = 1f;
 		emitComp.rotationalVelocity = 0.0f;
 		emitComp.acceleration.y = -10f;
 
@@ -202,9 +203,9 @@ public class ParticleFactory {
 		emitComp.collisionRect.setSize(texW, texH);
 		emitComp.collisionRect.setCenter(0.0f, 0.0f);
 
-		emitComp.lifetime = 2.0f;
+		emitComp.lifetime = 1.0f;
 		emitComp.intermittency = 0.05f;
-		emitComp.rate = 80f;
+		emitComp.rate = 20f;
 
 		return emitComp;
 	}

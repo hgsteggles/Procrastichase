@@ -7,4 +7,5 @@ import com.badlogic.ashley.core.Component;
  */
 public class BoundsComponent implements Component {
 	public boolean entered = false;
+	public EventInterface onEnter = null;
 }

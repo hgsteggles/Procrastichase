@@ -29,8 +29,11 @@ public class BoundsSystem extends IteratingSystem {
 			if (bc.entered)
 				getEngine().removeEntity(entity);
 		}
-		else {
+		else if (!bc.entered) {
 			bc.entered = true;
+
+			if (bc.onEnter != null)
+				bc.onEnter.dispatchEvent(entity);
 		}
 	}
 

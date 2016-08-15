@@ -909,7 +909,7 @@ Background
   index: -1
 lightline
   rotate: false
-  xy: 708, 42
+  xy: 708, 48
   size: 150, 32
   orig: 150, 32
   offset: 0, 0
@@ -923,7 +923,7 @@ sheepaura
   index: -1
 sheepeye
   rotate: false
-  xy: 872, 354
+  xy: 866, 354
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -944,14 +944,14 @@ sheepstare
   index: -1
 sound-off
   rotate: false
-  xy: 906, 280
+  xy: 764, 286
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 sound-on
   rotate: false
-  xy: 764, 178
+  xy: 900, 280
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
@@ -977,65 +977,51 @@ tournament-button
   orig: 106, 106
   offset: 0, 0
   index: -1
-tournament-button-off
-  rotate: false
-  xy: 764, 280
-  size: 106, 106
-  orig: 106, 106
-  offset: 0, 0
-  index: -1
-tournament-button-on
-  rotate: false
-  xy: 764, 280
-  size: 106, 106
-  orig: 106, 106
-  offset: 0, 0
-  index: -1
 tron-boost
   rotate: false
-  xy: 866, 178
+  xy: 764, 184
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-delay
   rotate: false
-  xy: 504, 156
+  xy: 866, 178
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-down
   rotate: false
-  xy: 606, 156
+  xy: 504, 156
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-sawtooth
   rotate: false
-  xy: 708, 76
+  xy: 606, 156
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-square
   rotate: false
-  xy: 504, 54
+  xy: 708, 82
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-up
   rotate: false
-  xy: 606, 54
+  xy: 504, 54
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-wave
   rotate: false
-  xy: 810, 76
+  xy: 606, 54
   size: 100, 100
   orig: 100, 100
   offset: 0, 0

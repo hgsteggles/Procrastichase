@@ -192,7 +192,7 @@ public class World {
 		ipos += 3;
 		engine.addEntity(EntityFactory.createHangingStar(ipos));
 		engine.addEntity(createOffsetThrownObject(BulletType.SAR, ipos));
-		ipos += 6;
+		ipos += 8;
 		engine.addEntity(EntityFactory.createPage(ipos, false));
 		engine.addEntity(EntityFactory.createTonye(ipos));
 		ipos += 1;
