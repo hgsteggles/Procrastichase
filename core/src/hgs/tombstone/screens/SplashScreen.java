@@ -18,7 +18,7 @@ import hgs.tombstone.world.WorldUI;
 import java.util.ArrayList;
 
 public class SplashScreen extends BasicScreen {
-	private final float SHEEP_LOC_Y = WORLD_HEIGHT / 2f + 0.6f;
+	private final float SHEEP_LOC_Y = WORLD_HEIGHT / 2f;
 	float accum = 0;
 
 	public SplashScreen(TombstoneGame game) {
@@ -35,13 +35,12 @@ public class SplashScreen extends BasicScreen {
 		add(createEyeLine(true, false));
 		add(createEyeLine(false, true));
 		add(createEyeLine(false, false));
-		add(createEye(true));
-		add(createEye(false));
+		//add(createEye(true));
+		//add(createEye(false));
 		add(createEyeAura(true));
 		add(createEyeAura(false));
 		add(createEyeLight(true));
 		add(createEyeLight(false));
-		add(createSheepText());
 	}
 
 	@Override
@@ -53,46 +52,6 @@ public class SplashScreen extends BasicScreen {
 		}
 
 		accum += delta;
-	}
-
-	private Entity createSheepText() {
-		Entity entity = new Entity();
-
-		TextureComponent texComp = new TextureComponent();
-		texComp.region = GameArt.sheeptext;
-		texComp.size.x = 0.0f;
-		texComp.size.y = 0.0f;
-		texComp.color.set(Color.WHITE);
-		entity.add(texComp);
-
-		TransformComponent transComp = new TransformComponent();
-		float x = BasicScreen.WORLD_WIDTH / 2.0f;
-		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 2.2f;
-		float z = Depths.screenbgZ + 4;
-		transComp.body.initPosition(x, y, z);
-		entity.add(transComp);
-
-		float period = 0.5f;
-
-		TweenComponent tweenComp = new TweenComponent();
-		TweenSpec tweenSpec = new TweenSpec();
-		tweenSpec.period = period;
-		tweenSpec.cycle = TweenSpec.Cycle.ONCE;
-		tweenSpec.interp = Interpolation.sine;
-		tweenSpec.tweenInterface = new TweenInterface() {
-			@Override
-			public void applyTween(Entity e, float a) {
-				TextureComponent txc = ComponentMappers.texture.get(e);
-				txc.size.x = 5.0f * a;
-				txc.size.y = 2.0f * a;
-			}
-		};
-		tweenComp.tweenSpecs.add(tweenSpec);
-		entity.add(tweenComp);
-
-		entity.add(new HeadsUpDisplayComponent());
-
-		return entity;
 	}
 
 	private Entity createEye(boolean isLeft) {

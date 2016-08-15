@@ -12,6 +12,7 @@ import hgs.tombstone.TombstoneGame;
 import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
 import hgs.tombstone.elements.Colors;
+import hgs.tombstone.elements.Depths;
 import hgs.tombstone.elements.Enums;
 import hgs.tombstone.elements.RNG;
 
@@ -38,8 +39,7 @@ public class EmitterSystem extends IteratingSystem {
 			particle.add(createParticleMovement(emitComp, ComponentMappers.movement.get(entity)));
 			particle.add(createParticleTransform(emitComp, transComp));
 			particle.add(createParticleTexture(emitComp));
-			if (emitComp.tweenInterface != null)
-				particle.add(createParticleTween(emitComp));
+			particle.add(createParticleTween(emitComp));
 			if (emitComp.collisionType != Enums.CollisionType.NONE)
 				particle.add(createParticleCollision(emitComp, ComponentMappers.transform.get(particle)));
 			particle.add(new BoundsComponent());
@@ -62,7 +62,20 @@ public class EmitterSystem extends IteratingSystem {
 		tweenSpec.start = 1.0f;
 		tweenSpec.end = 0.0f;
 		tweenSpec.interp = Interpolation.linear;
-		tweenSpec.tweenInterface = emitComp.tweenInterface;
+		if (emitComp.tweenInterface != null) {
+			tweenSpec.tweenInterface = emitComp.tweenInterface;
+		}
+		else {
+			tweenSpec.tweenInterface = new TweenInterface() {
+				@Override
+				public void applyTween(Entity e, float a) {}
+
+				@Override
+				public void endTween(Entity e) {
+					e.add(new RemovalComponent());
+				}
+			};
+		}
 		tweenComp.tweenSpecs.add(tweenSpec);
 
 		return tweenComp;
@@ -101,7 +114,7 @@ public class EmitterSystem extends IteratingSystem {
 		float x = sourceTrans.body.getPosition().x + emitComp.sourceRect.getX() + rx * emitComp.sourceRect.getWidth();
 		float y = sourceTrans.body.getPosition().y + emitComp.sourceRect.getY() + ry * emitComp.sourceRect.getHeight();
 
-		transComp.body.initPosition(x, y, sourceTrans.body.getPosition().z - 1);
+		transComp.body.initPosition(x, y, Depths.particleZ);
 		transComp.body.initRotation(emitComp.sourceRotation);
 
 		return transComp;

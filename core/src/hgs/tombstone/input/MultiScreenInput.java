@@ -48,7 +48,6 @@ public class MultiScreenInput implements InputProcessor {
 		for (int i = 0; i < npointers; ++i)
 			inputDataMap.get(i).reset();
 
-		keyDownSet.clear();
 		keyDownLastSet.clear();
 		keyUpLastSet.clear();
 

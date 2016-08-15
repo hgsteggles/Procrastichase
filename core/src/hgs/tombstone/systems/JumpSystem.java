@@ -3,6 +3,7 @@ package hgs.tombstone.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.math.Interpolation;
 import hgs.tombstone.components.*;
 import hgs.tombstone.screens.BasicScreen;
 import hgs.tombstone.elements.Enums.*;
@@ -20,7 +21,7 @@ public class JumpSystem extends IteratingSystem {
 		JumpComponent jumpComp = ComponentMappers.jump.get(entity);
 		StateComponent stateComp = ComponentMappers.state.get(entity);
 
-		if (stateComp.get() == PlayerState.JUMP.value()) {
+		if (stateComp.get() == PlayerState.JUMP.value() && !jumpComp.falling) {
 			if (stateComp.time > jumpComp.maxJumpTime
 					|| (!jumpComp.jumpHeld && stateComp.time > jumpComp.minJumpTime)) {
 				fall(entity);
@@ -34,25 +35,86 @@ public class JumpSystem extends IteratingSystem {
 		jumpComp.jumpHeld = true;
 		jumpComp.pointer = pointer;
 
-		TransformComponent transComp = ComponentMappers.transform.get(entity);
 		StateComponent stateComp = ComponentMappers.state.get(entity);
-
-		transComp.body.updatePosY(BasicScreen.WORLD_HEIGHT / 2.0f + 0.5f);
 		stateComp.set(PlayerState.JUMP.value());
 
-		CollisionComponent collComp = ComponentMappers.collision.get(entity);
-		collComp.rect.setY(collComp.rect.getY() + 1.0f);
+		final float T = 0.3f * jumpComp.minJumpTime;
+		final float y0 = 0.5f * BasicScreen.WORLD_HEIGHT - 0.5f;
+		final float H = 0.5f * BasicScreen.WORLD_HEIGHT + 0.5f;
+		final float u = 2.0f * (H - y0) / T;
+		final float acc = - u * u / (2.0f * (H - y0));
+
+		TweenComponent tweenComp = ComponentMappers.tween.get(entity);
+		if (tweenComp == null) {
+			tweenComp = new TweenComponent();
+			entity.add(tweenComp);
+		}
+		TweenSpec tweenSpec = new TweenSpec();
+		tweenSpec.cycle = TweenSpec.Cycle.ONCE;
+		tweenSpec.interp = Interpolation.linear;
+		tweenSpec.start = 0;
+		tweenSpec.end = T;
+		tweenSpec.period = T;
+		tweenSpec.tweenInterface = new TweenInterface() {
+			@Override
+			public void applyTween(Entity e, float a) {
+				float posY = y0 + u * a + 0.5f * acc * a * a;
+				posY = Math.min(posY, H);
+
+				TransformComponent transComp = ComponentMappers.transform.get(e);
+				transComp.body.updatePosY(posY);
+
+				CollisionComponent collComp = ComponentMappers.collision.get(e);
+				if (collComp != null)
+					collComp.rect.setY(posY - 0.5f * collComp.rect.height);
+			}
+		};
+		tweenComp.tweenSpecs.add(tweenSpec);
 	}
 
 	static void fall(Entity entity) {
-		TransformComponent transComp = ComponentMappers.transform.get(entity);
-		StateComponent stateComp = ComponentMappers.state.get(entity);
+		JumpComponent jumpComp = ComponentMappers.jump.get(entity);
+		jumpComp.falling = true;
 
-		transComp.body.updatePosY(BasicScreen.WORLD_HEIGHT / 2f - 0.5f);
-		stateComp.set(stateComp.prevState);
+		final float T = 0.3f * jumpComp.minJumpTime;
+		final float y0 = 0.5f * BasicScreen.WORLD_HEIGHT - 0.5f;
+		final float H = 0.5f * BasicScreen.WORLD_HEIGHT + 0.5f;
+		final float u = 2.0f * (H - y0) / T;
+		final float acc = - u * u / (2.0f * (H - y0));
 
-		CollisionComponent collComp = ComponentMappers.collision.get(entity);
-		if (collComp != null)
-			collComp.rect.setY(collComp.rect.getY() - 1.0f);
+		TweenComponent tweenComp = ComponentMappers.tween.get(entity);
+		if (tweenComp == null) {
+			tweenComp = new TweenComponent();
+			entity.add(tweenComp);
+		}
+		TweenSpec tweenSpec = new TweenSpec();
+		tweenSpec.cycle = TweenSpec.Cycle.ONCE;
+		tweenSpec.interp = Interpolation.linear;
+		tweenSpec.start = T;
+		tweenSpec.end = 2.0f * T;
+		tweenSpec.period = T;
+		tweenSpec.tweenInterface = new TweenInterface() {
+			@Override
+			public void applyTween(Entity e, float a) {
+				float posY = y0 + u * a + 0.5f * acc * a * a;
+				posY = Math.max(posY, y0);
+
+				TransformComponent transComp = ComponentMappers.transform.get(e);
+				transComp.body.updatePosY(posY);
+
+				CollisionComponent collComp = ComponentMappers.collision.get(e);
+				if (collComp != null)
+					collComp.rect.setY(posY - 0.5f * collComp.rect.height);
+			}
+
+			@Override
+			public void endTween(Entity e) {
+				StateComponent stateComp = ComponentMappers.state.get(e);
+				stateComp.set(stateComp.prevState);
+
+				ComponentMappers.jump.get(e).falling = false;
+			}
+		};
+		tweenComp.tweenSpecs.add(tweenSpec);
 	}
 }

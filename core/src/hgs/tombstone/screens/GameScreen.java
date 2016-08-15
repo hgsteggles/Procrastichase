@@ -1,6 +1,7 @@
 package hgs.tombstone.screens;
 
 import hgs.tombstone.TombstoneGame;
+import hgs.tombstone.elements.Enums;
 import hgs.tombstone.input.InputManager;
 import hgs.tombstone.systems.*;
 import hgs.tombstone.world.World;
@@ -13,14 +14,15 @@ public class GameScreen extends BasicScreen {
 	private int level;
 	private boolean doublespeed = false;
 	private int old_npages;
+	private Enums.PlayerType playerType;
 
-	public GameScreen(TombstoneGame game, int level, int npages) {
+	public GameScreen(TombstoneGame game, int level, int npages, Enums.PlayerType playerType) {
 		super(game);
 
 		this.old_npages = npages;
-
 		this.level = level;
-		world = new World(level, npages);
+		this.playerType = playerType;
+		world = new World(level, npages, playerType);
 
 		add(new ClickSystem());
 		add(new TweenSystem());
@@ -42,7 +44,7 @@ public class GameScreen extends BasicScreen {
 		add(new EmitterSystem());
 		add(new MiniBossSystem());
 		add(new BossSystem());
-		add(new ShakeSystem());
+		//add(new ShakeSystem());
 		add(new StopSystem());
 		add(new BarrierSystem());
 		add(new HealthBarSystem());
@@ -62,12 +64,12 @@ public class GameScreen extends BasicScreen {
 
 		if (engine.getSystem(GameStateSystem.class).screenChange == GameStateSystem.SCREEN_GAMEOVER) {
 			if (level != 5)
-				game.setScreen(new GameoverScreen(game, level, old_npages));
+				game.setScreen(new GameoverScreen(game, level, old_npages, playerType));
 			else
-				game.setScreen(new EndlessFinishScreen(game, world.timeCount.count));
+				game.setScreen(new EndlessFinishScreen(game, world.timeCount.count, playerType));
 		}
 		else if (engine.getSystem(GameStateSystem.class).screenChange == GameStateSystem.SCREEN_NEXTCHAPTER) {
-			game.setScreen(new ChapterCompleteScreen(game, level, world.getNumberPages()));
+			game.setScreen(new ChapterCompleteScreen(game, level, world.getNumberPages(), playerType));
 		}
 
 		if (engine.getSystem(GameStateSystem.class).nextScreenChange != GameStateSystem.SCREEN_NONE

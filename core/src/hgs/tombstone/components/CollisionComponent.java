@@ -2,6 +2,7 @@ package hgs.tombstone.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import hgs.tombstone.elements.Enums;
 
 /**
@@ -9,5 +10,6 @@ import hgs.tombstone.elements.Enums;
  */
 public class CollisionComponent implements Component {
 	public Enums.CollisionType type = Enums.CollisionType.PLAYER;
-	public Rectangle rect = new Rectangle();
+	public final Rectangle rect = new Rectangle();
+	public final Vector2 offset = new Vector2();
 }

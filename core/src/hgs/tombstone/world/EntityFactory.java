@@ -10,6 +10,7 @@ import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
 import hgs.tombstone.elements.Depths;
 import hgs.tombstone.elements.Enums;
+import hgs.tombstone.elements.GameParameters;
 import hgs.tombstone.screens.BasicScreen;
 import hgs.tombstone.systems.RenderingSystem;
 
@@ -17,6 +18,67 @@ import hgs.tombstone.systems.RenderingSystem;
  * Created by harry on 05/04/16.
  */
 public class EntityFactory {
+	public static Entity createRIP(float posX) {
+		Entity entity = new Entity();
+
+		TextureComponent texComp = new TextureComponent();
+		texComp.region = GameArt.rip;
+		texComp.size.x = 2.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionWidth();
+		texComp.size.y = 2.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionHeight();
+		entity.add(texComp);
+
+		TransformComponent transComp = new TransformComponent();
+		transComp.body.initPosition(posX + 3.8f, 0.32f + 0.5f * BasicScreen.WORLD_HEIGHT, Depths.worldbgZ + 1);
+		entity.add(transComp);
+
+		return entity;
+	}
+
+	public static Entity createFramedPicture(float posX, int level) {
+		Entity entity = new Entity();
+
+		TextureComponent texComp = new TextureComponent();
+		if (level == 1)
+			texComp.region = GameArt.frameCrab;
+		else if (level == 2)
+			texComp.region = GameArt.frameHorsehead;
+		else if (level == 3)
+			texComp.region = GameArt.frameRing;
+		else if (level == 4)
+			texComp.region = GameArt.frameSombrero;
+		texComp.size.x = 2.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionWidth();
+		texComp.size.y = 2.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionHeight();
+		entity.add(texComp);
+
+		TransformComponent transComp = new TransformComponent();
+		transComp.body.initPosition(posX + 6.1f, 0.32f + 0.5f * BasicScreen.WORLD_HEIGHT, Depths.worldbgZ + 1);
+		entity.add(transComp);
+
+		return entity;
+	}
+
+	public static Entity createStarryBackground() {
+		Entity entity = new Entity();
+
+		TextureComponent texComp = new TextureComponent();
+		texComp.region = new TextureRegion(GameArt.backgroundStars);
+		texComp.size.x = 1.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionWidth();
+		texComp.size.y = 1.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionHeight();
+		entity.add(texComp);
+
+		TransformComponent transComp = new TransformComponent();
+		transComp.body.initPosition(0.5f * BasicScreen.WORLD_WIDTH, 0.5f * BasicScreen.WORLD_HEIGHT, Depths.worldbgZ);
+		entity.add(transComp);
+
+		entity.add(new HeadsUpDisplayComponent());
+
+		ScrollComponent scrollComp = new ScrollComponent();
+		scrollComp.speed.set(-0.2f, 0.0f);
+		scrollComp.rotation = 0f;
+		entity.add(scrollComp);
+
+		return entity;
+	}
 	public static Entity createTombstone(float posX) {
 		Entity entity = new Entity();
 
@@ -29,7 +91,7 @@ public class EntityFactory {
 		TransformComponent transComp = new TransformComponent();
 		float x = posX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f;
-		float z = 0.0f;
+		float z = Depths.playerZ - 1;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 
@@ -45,8 +107,8 @@ public class EntityFactory {
 		stateComp.set(0);
 		entity.add(stateComp);
 
-		float strikeTime = 0.5f;
-		float lifetime = 1.0f;
+		float strikeTime = 0.25f;
+		float lifetime = 0.5f;
 
 		AnimationComponent animComp = new AnimationComponent();
 		animComp.animations.put(stateComp.get(), new Animation(strikeTime / GameArt.boltAnim.size, GameArt.boltAnim, Animation.PlayMode.NORMAL));
@@ -110,7 +172,7 @@ public class EntityFactory {
 		entity.add(texComp);
 
 		TransformComponent transComp = new TransformComponent();
-		float x = posX;
+		float x = posX + BasicScreen.WORLD_WIDTH - texComp.size.x / 2f;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f;
 		float z = Depths.worldbgZ + 1;
 		transComp.body.initPosition(x, y, z);
@@ -151,7 +213,7 @@ public class EntityFactory {
 
 		CollisionComponent collComp = new CollisionComponent();
 		collComp.type = Enums.CollisionType.BOSS_AREA;
-		TextureRegion region = GameArt.playerRunning.first();
+		TextureRegion region = GameArt.playerRunning.get(Enums.PlayerType.FERNANDO).first();
 		collComp.rect.setSize(10f, 2.0f);
 		collComp.rect.setCenter(5.0f + posX + 0 + region.getRegionWidth() / (float)(region.getRegionHeight()), BasicScreen.WORLD_HEIGHT / 2.0f);
 		entity.add(collComp);
@@ -187,7 +249,7 @@ public class EntityFactory {
 		TransformComponent transComp = new TransformComponent();
 		float x = posX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 1.0f + texComp.size.y / 2.0f;
-		float z = 2.0f;
+		float z = Depths.objectZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 
@@ -212,7 +274,7 @@ public class EntityFactory {
 		TransformComponent transComp = new TransformComponent();
 		float x = posX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f + 1.0f - texComp.size.y / 2.0f;
-		float z = 2.0f;
+		float z = Depths.objectZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 
@@ -221,6 +283,15 @@ public class EntityFactory {
 		collComp.rect.setSize(texComp.size.x, texComp.size.y);
 		collComp.rect.setCenter(x, y);
 		entity.add(collComp);
+
+		return entity;
+	}
+
+	public static Entity createThrownObject(Enums.BulletType bulletType, float posX, float speedX) {
+		Entity entity = BulletFactory.createProjectile(bulletType, posX, 0.5f * BasicScreen.WORLD_HEIGHT, speedX);
+
+		CollisionComponent collComp = ComponentMappers.collision.get(entity);
+		collComp.type = Enums.CollisionType.ENEMY_BULLET;
 
 		return entity;
 	}
@@ -264,6 +335,7 @@ public class EntityFactory {
 		//entity.add(new PeeComponent());
 		entity.add(ParticleFactory.createPeeEmitter());
 		entity.add(new DisableComponent());
+		entity.add(new BoundsComponent());
 
 		return entity;
 	}
@@ -353,6 +425,38 @@ public class EntityFactory {
 
 	public static Entity createPin(float posX) {
 		return createFloorObject(posX, GameArt.pin);
+	}
+
+	public static Entity createJugglingBall(float posX) {
+		return createFloorObject(posX, GameArt.bulletAnim.get(Enums.BulletType.JUGGLINGBALL).first());
+	}
+
+	public static Entity createComputerDesk(float posX) {
+		return createFloorObject(posX, GameArt.computerDesk);
+	}
+
+	public static Entity createComputerDeskDouble(float posX) {
+		return createFloorObject(posX, GameArt.computerDeskDouble);
+	}
+
+	public static Entity createBaubles(float posX) {
+		return createCeilingObject(posX, GameArt.baubles);
+	}
+
+	public static Entity createDrawers(float posX) {
+		return createFloorObject(posX, GameArt.drawers);
+	}
+
+	public static Entity createMinifridge(float posX) {
+		return createFloorObject(posX, GameArt.minifridge);
+	}
+
+	public static Entity createChairRight(float posX) {
+		return createFloorObject(posX, GameArt.chairRight);
+	}
+
+	public static Entity createChairLeft(float posX) {
+		return createFloorObject(posX, GameArt.chairLeft);
 	}
 
 	public static Entity createGameState(Enums.GameState state) {

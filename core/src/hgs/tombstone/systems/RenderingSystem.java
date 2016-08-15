@@ -92,6 +92,12 @@ public class RenderingSystem extends EntitySystem {
 		float renderScaleY = interp * t.body.getScale().y + (1.0f - interp) * t.body.getPrevScale().y;
 		float renderRotation = interp * t.body.getRotation() + (1.0f - interp) * t.body.getPrevRotation();
 
+		t.body.updatePosX(t.body.getPosition().x);
+		t.body.updatePosY(t.body.getPosition().y);
+		t.body.updatePosZ(t.body.getPosition().z);
+		t.body.updateScale(t.body.getScale().x, t.body.getScale().y);
+		t.body.updateRotation(t.body.getRotation());
+
 		if (ComponentMappers.shader.has(entity)) {
 			ShaderComponent shaderComp = ComponentMappers.shader.get(entity);
 

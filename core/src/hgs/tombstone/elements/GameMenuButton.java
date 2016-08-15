@@ -74,8 +74,8 @@ public class GameMenuButton {
 		entity.add(clickComponent);
 
 		TextButtonComponent textButtonComponent = new TextButtonComponent();
-		textButtonComponent.base = nineComp.color;
-		textButtonComponent.pressed = new Color(Color.GREEN);
+		textButtonComponent.base.set(nineComp.color);
+		textButtonComponent.pressed.set(Color.GREEN);
 		entity.add(textButtonComponent);
 
 		return entity;

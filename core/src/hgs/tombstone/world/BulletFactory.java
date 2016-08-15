@@ -40,7 +40,7 @@ public class BulletFactory {
 		ObjectMap<BossType, BulletCreateType> map = new ObjectMap<BossType, BulletCreateType>();
 		map.put(BossType.MELVIN, BulletCreateType.BEER);
 		map.put(BossType.JULIAN, BulletCreateType.MILK);
-		map.put(BossType.RENE, BulletCreateType.FIREBALL);
+		map.put(BossType.RENE, BulletCreateType.JUGGLINGPIN);
 		map.put(BossType.SVEN, BulletCreateType.RANDOM);
 		map.put(BossType.ENDLESS, BulletCreateType.ENDLESS);
 
@@ -87,6 +87,7 @@ public class BulletFactory {
 		set.add(BulletType.SAR);
 		set.add(BulletType.MILK);
 		set.add(BulletType.JUGGLINGBALL);
+		set.add(BulletType.JUGGLINGPIN);
 
 		return set;
 	}
@@ -138,8 +139,9 @@ public class BulletFactory {
 
 		MovementComponent moveComp = new MovementComponent();
 		moveComp.linearVelocity.x = speedX;
-		if (rotatingBullets.contains(type))
-			moveComp.rotationalVelocity = 90f;
+		if (rotatingBullets.contains(type)) {
+			moveComp.rotationalVelocity = speedX < 0 ? 90f : -90f;
+		}
 		entity.add(moveComp);
 
 		entity.add(new BoundsComponent());
@@ -168,14 +170,17 @@ public class BulletFactory {
 		else if (type == BulletType.FIREBALL) {
 			entity.add(ParticleFactory.createFireballEmitter());
 		}
+		else if (type == BulletType.PIZZA) {
+			entity.add(ParticleFactory.createPepperoniEmitter());
+		}
 		else if (type == BulletType.SPEECH_UP || type == BulletType.SPEECH_DOWN
-				|| type == BulletType.FIREBALL_UP || type == BulletType.FIREBALL_DOWN
 				|| type == BulletType.TRON_UP || type == BulletType.TRON_DOWN) {
 			ShiftComponent shiftComp = new ShiftComponent();
-			shiftComp.up = (type == BulletType.SPEECH_UP || type == BulletType.FIREBALL_UP || type == BulletType.TRON_UP);
+			shiftComp.up = (type == BulletType.SPEECH_UP || type == BulletType.TRON_UP);
 			entity.add(shiftComp);
 		}
-		else if (type == BulletType.TRON_WAVE) {
+		else if (type == BulletType.TRON_WAVE
+				|| type == BulletType.JUGGLINGPIN) {
 			entity.add(new WaveComponent());
 		}
 		else if (type == BulletType.TRON_SQUARE) {
@@ -299,7 +304,7 @@ public class BulletFactory {
 			return BulletType.SAR;
 		}
 		else if (createType == BulletCreateType.LIGHTNING) {
-			return BulletType.LIGHTNING;
+			return BulletType.PIZZA;
 		}
 		else if (createType == BulletCreateType.MILK) {
 			return BulletType.MILK;
@@ -317,16 +322,14 @@ public class BulletFactory {
 			return BulletType.SCIMITAR;
 		}
 		else if (createType == BulletCreateType.SPEECH) {
-			return BulletType.SPEECH_DOWN;
+			int r = RNG.genInt(2);
+			return r == 1 ? BulletType.SPEECH_DOWN : BulletType.SPEECH_UP;
 		}
 		else if (createType == BulletCreateType.FIREBALL) {
-			int r = RNG.genInt(3);
-			if (r == 0)
-				return BulletType.FIREBALL;
-			else if (r == 1)
-				return BulletType.FIREBALL_UP;
-			else
-				return BulletType.FIREBALL_DOWN;
+			return BulletType.FIREBALL;
+		}
+		else if (createType == BulletCreateType.JUGGLINGPIN) {
+			return BulletType.JUGGLINGPIN;
 		}
 		else if (createType == BulletCreateType.TRON) {
 			int r = RNG.genInt(5);
@@ -342,82 +345,53 @@ public class BulletFactory {
 				return BulletType.TRON_UP;
 		}
 		else if (createType == BulletCreateType.RANDOM) {
-			int r = RNG.genInt(22);
+			int r = RNG.genInt(21);
 			if (r == 0)
 				return BulletType.BEER;
-			else if (r == 0)
-				return BulletType.FIREBALL_UP;
 			else if (r == 1)
 				return BulletType.FIREBALL;
 			else if (r == 2)
-				return BulletType.FIREBALL_DOWN;
-			else if (r == 3)
 				return BulletType.JUGGLINGBALL;
-			else if (r == 4)
+			else if (r == 3)
 				return BulletType.MILK;
-			else if (r == 5)
+			else if (r == 4)
 				return BulletType.SAR;
-			else if (r == 6)
+			else if (r == 5)
 				return BulletType.SPEECH_DOWN;
-			else if (r == 7)
+			else if (r == 6)
 				return BulletType.SPEECH_UP;
-			else if (r < 10)
+			else if (r < 8)
 				return BulletType.TRON_DELAY;
-			else if (r < 13)
+			else if (r < 11)
 				return BulletType.TRON_DOWN;
-			else if (r < 16)
+			else if (r < 14)
 				return BulletType.TRON_SQUARE;
-			else if (r < 19)
+			else if (r < 17)
 				return BulletType.TRON_WAVE;
-			else
+			else if (r < 20)
 				return BulletType.TRON_UP;
+			else
+				return BulletType.JUGGLINGPIN;
 		}
 		else
 			return BulletType.RAINBOW;
 	}
 
 	public static BulletType getEndlessBulletType(float time) {
-		float tron_weight = 0.0f;
-		if (time >= 280)
-			tron_weight = 1.0f;
-		else if (time >= 240)
-			tron_weight = 0.9f;
-		else if (time >= 200)
-			tron_weight = 0.8f;
-		else if (time >= 160)
-			tron_weight = 0.7f;
-		else if (time >= 120)
-			tron_weight = 0.6f;
-		else if (time >= 80)
-			tron_weight = 0.5f;
-		else if (time >= 40)
-			tron_weight = 0.4f;
+		float tmax = 280;
+		float mintronw = 0.5f;
+		float tron_weight = Math.min(mintronw + (1.0f - mintronw) * (tmax - time) / tmax, 1.0f);
 		float tron_r = RNG.genFloat();
 
 		if (tron_r >= tron_weight) {
-			int r = RNG.genInt(5);
-
-			if (r == 0)
-				return BulletType.BEER;
-			else if (r == 1)
-				return BulletType.FIREBALL;
-			else if (r == 2)
-				return BulletType.JUGGLINGBALL;
-			else if (r == 3)
-				return BulletType.MILK;
-			else if (r == 4)
-				return BulletType.SAR;
-			else
-				return BulletType.RAINBOW;
+			return BulletType.FIREBALL;
 		}
 		else {
 			int rmax = 4;
-			if (time >= 400)
+			if (time >= 120)
 				rmax = 6;
-			else if (time >= 300)
+			else if (time >= 60)
 				rmax = 5;
-			else if (time >= 80)
-				rmax = 4;
 			int r = RNG.genInt(rmax);
 			if (r == 0)
 				return BulletType.TRON_DOWN;
@@ -428,9 +402,9 @@ public class BulletFactory {
 			else if (r == 3)
 				return BulletType.TRON_WAVE;
 			else if (r == 4)
-				return BulletType.TRON_DELAY;
-			else if (r == 5)
 				return BulletType.TRON_SAWTOOTH;
+			else if (r == 5)
+				return BulletType.TRON_DELAY;
 			else
 				return BulletType.RAINBOW;
 		}
@@ -477,15 +451,14 @@ public class BulletFactory {
 		BulletDirectionStyle style;
 		if (bulletType == BulletType.TRON_SQUARE
 				|| bulletType == BulletType.TRON_WAVE
-				|| bulletType == BulletType.TRON_SAWTOOTH)
+				|| bulletType == BulletType.TRON_SAWTOOTH
+				|| bulletType == BulletType.JUGGLINGPIN)
 			style = BulletDirectionStyle.SPLIT;
 		else if (bulletType == BulletType.TRON_UP
-				|| bulletType == BulletType.FIREBALL_UP
 				|| bulletType == BulletType.SPEECH_UP) {
 			style = BulletDirectionStyle.LOWER;
 		}
 		else if (bulletType == BulletType.TRON_DOWN
-				|| bulletType == BulletType.FIREBALL_DOWN
 				|| bulletType == BulletType.SPEECH_DOWN) {
 			style = BulletDirectionStyle.UPPER;
 		}

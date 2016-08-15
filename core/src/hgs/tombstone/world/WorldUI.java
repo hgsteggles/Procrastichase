@@ -1,6 +1,7 @@
 package hgs.tombstone.world;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import hgs.tombstone.assets.Assets;
 import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
+import hgs.tombstone.elements.Colors;
 import hgs.tombstone.elements.Depths;
 import hgs.tombstone.elements.Enums;
 import hgs.tombstone.screens.BasicScreen;
@@ -18,6 +20,23 @@ import hgs.tombstone.systems.RenderingSystem;
  * Created by harry on 05/04/16.
  */
 public class WorldUI {
+	public static Entity createControlButtonText(float x, float y, String text) {
+		Entity entity = new Entity();
+
+		BitmapFontComponent fontComp = new BitmapFontComponent();
+		fontComp.font = "retro";
+		fontComp.string = text;
+		Colors.setHue(fontComp.color, 0.95f, 0.8f, 0.8f);
+		fontComp.centering = true;
+		entity.add(fontComp);
+
+		TransformComponent transComp = new TransformComponent();
+		transComp.body.initPosition(x, y, Depths.hudZ + 1);
+		entity.add(transComp);
+
+		return entity;
+	}
+
 	public static Entity createControlButton(float x, float y, float w, float h, Enums.ControlType type) {
 		Entity entity = new Entity();
 
@@ -66,19 +85,23 @@ public class WorldUI {
 		return entity;
 	}
 
-	public static Entity createInstructions() {
+	public static Entity createSelectCharButton(boolean isLeft) {
 		Entity entity = new Entity();
 
+		Color offColor = new Color(113f/255f, 95f/255f, 45f/255f, 1.0f);
+		Color onColor = new Color(26f/255f, 193f/255f, 73f/255f, 1.0f);
+
 		TextureComponent texComp = new TextureComponent();
-		texComp.region = GameArt.instructions;
-		texComp.size.x = 2.0f;
-		texComp.size.y = 1.0f;
+		texComp.region = isLeft ? GameArt.selectCharButtonLeft : GameArt.selectCharButtonRight;
+		texComp.size.x = 2.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionWidth();
+		texComp.size.y = 2.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionHeight();
+		texComp.color.set(offColor);
 		entity.add(texComp);
 
 		TransformComponent transComp = new TransformComponent();
-		float x = 1.5f;
-		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 2.5f + texComp.size.y / 2.0f;
-		float z = Depths.hudZ;
+		float x = isLeft ? 0.5f * texComp.size.x : BasicScreen.WORLD_WIDTH - 0.5f * texComp.size.x;
+		float y = 0.5f * BasicScreen.WORLD_HEIGHT;
+		float z = Depths.worldoverlayZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 

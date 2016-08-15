@@ -33,28 +33,22 @@ public class PlayerControlSystem extends EntitySystem {
 		if (InputManager.screenInput.keyUpLastSet.contains(Input.Keys.W)) {
 			jumpReleased();
 		}
-		else if (InputManager.screenInput.keyDownSet.contains(Input.Keys.W)) {
-			if (InputManager.screenInput.keyDownLastSet.contains(Input.Keys.W))
-				attemptJump(-1);
-			else
-				holdJump();
+		if (InputManager.screenInput.keyDownSet.contains(Input.Keys.W)) {
+			attemptJump(-1);
 		}
 
 		if (InputManager.screenInput.keyUpLastSet.contains(Input.Keys.S)) {
 			slideReleased();
 		}
-		else if (InputManager.screenInput.keyDownSet.contains(Input.Keys.S)) {
-			if (InputManager.screenInput.keyDownLastSet.contains(Input.Keys.S))
-				attemptSlide(-1);
-			else
-				holdSlide();
+		if (InputManager.screenInput.keyDownSet.contains(Input.Keys.S)) {
+			attemptSlide(-1);
 		}
 
 		for (int iptr = 0; iptr != InputManager.screenInput.getNumPointers(); ++iptr) {
 			if (InputManager.screenInput.get(iptr).isPointerUpLast())
 				pointerReleased(iptr);
 
-			if (InputManager.screenInput.get(iptr).isPointerDownLast()) {
+			if (InputManager.screenInput.get(iptr).isPointerDown()) {
 				Vector2 clickPos = InputManager.screenInput.get(iptr).getPointerDownLocation();
 
 				for (Entity button : buttons) {
@@ -69,20 +63,10 @@ public class PlayerControlSystem extends EntitySystem {
 									GunSystem.shoot(ComponentMappers.gun.get(player));
 								break;
 							case SLIDE:
-								for (Entity player : players) {
-									StateComponent stateComp = ComponentMappers.state.get(player);
-									if ((stateComp.get() == PlayerState.RUN.value()
-											|| stateComp.get() == PlayerState.IDLE.value()))
-										SlideSystem.slide(player, iptr);
-								}
+								attemptSlide(iptr);
 								break;
 							case JUMP:
-								for (Entity player : players) {
-									StateComponent stateComp = ComponentMappers.state.get(player);
-									if ((stateComp.get() == PlayerState.RUN.value()
-											|| stateComp.get() == PlayerState.IDLE.value()))
-										JumpSystem.jump(player, iptr);
-								}
+								attemptJump(iptr);
 								break;
 						}
 					}
@@ -141,44 +125,26 @@ public class PlayerControlSystem extends EntitySystem {
 
 	private void attemptJump(int pointer) {
 		for (Entity player : players) {
-			StateComponent stateComp = ComponentMappers.state.get(player);
-			if ((stateComp.get() == PlayerState.RUN.value()
-					|| stateComp.get() == PlayerState.IDLE.value())) {
-				JumpSystem.jump(player, pointer);
+			JumpComponent jumpComp = ComponentMappers.jump.get(player);
+			if (jumpComp.jumpReleased) {
+				StateComponent stateComp = ComponentMappers.state.get(player);
+				if ((stateComp.get() == PlayerState.RUN.value()
+						|| stateComp.get() == PlayerState.IDLE.value())) {
+					JumpSystem.jump(player, pointer);
+				}
 			}
 		}
 	}
 
 	private void attemptSlide(int pointer) {
 		for (Entity player : players) {
-			StateComponent stateComp = ComponentMappers.state.get(player);
-			if ((stateComp.get() == PlayerState.RUN.value()
-					|| stateComp.get() == PlayerState.IDLE.value())) {
-				SlideSystem.slide(player, pointer);
-			}
-		}
-	}
-
-	private void holdJump() {
-		for (Entity player : players) {
-			JumpComponent jumpComp = ComponentMappers.jump.get(player);
-			StateComponent stateComp = ComponentMappers.state.get(player);
-
-			if (stateComp.get() == PlayerState.JUMP.value()
-					&& !jumpComp.jumpReleased) {
-				jumpComp.jumpHeld = true;
-			}
-		}
-	}
-
-	private void holdSlide() {
-		for (Entity player : players) {
 			SlideComponent slideComp = ComponentMappers.slide.get(player);
-			StateComponent stateComp = ComponentMappers.state.get(player);
-
-			if (stateComp.get() == PlayerState.SLIDE.value()
-					&& !slideComp.slideReleased) {
-				slideComp.slideHeld = true;
+			if (slideComp.slideReleased) {
+				StateComponent stateComp = ComponentMappers.state.get(player);
+				if ((stateComp.get() == PlayerState.RUN.value()
+						|| stateComp.get() == PlayerState.IDLE.value())) {
+					SlideSystem.slide(player, pointer);
+				}
 			}
 		}
 	}

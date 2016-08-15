@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import hgs.tombstone.TombstoneGame;
 import hgs.tombstone.components.*;
+import hgs.tombstone.elements.Enums;
 import hgs.tombstone.input.InputManager;
 import hgs.tombstone.systems.RenderingSystem;
 
@@ -170,7 +171,7 @@ public abstract class BasicScreen implements Screen {
 		tweenComp.tweenSpecs.add(tweenSpec);
 	}
 
-	public void addFadeEndTween(Entity entity, final int level, final int npages) {
+	public void addFadeEndTween(Entity entity, final int level, final int npages, final Enums.PlayerType playerType) {
 		TweenComponent tweenComp = ComponentMappers.tween.get(entity);
 
 		TweenSpec tweenSpec = new TweenSpec();
@@ -189,7 +190,7 @@ public abstract class BasicScreen implements Screen {
 
 			@Override
 			public void endTween(Entity e) {
-				game.setScreen(new GameScreen(game, level, npages));
+				game.setScreen(new GameScreen(game, level, npages, playerType));
 			}
 		};
 		tweenComp.tweenSpecs.add(tweenSpec);

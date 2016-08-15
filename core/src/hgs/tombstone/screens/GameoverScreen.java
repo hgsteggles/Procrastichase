@@ -8,6 +8,7 @@ import hgs.tombstone.TombstoneGame;
 import hgs.tombstone.assets.Assets;
 import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
+import hgs.tombstone.elements.Enums;
 import hgs.tombstone.elements.GameMenuButton;
 import hgs.tombstone.elements.GameSettings;
 import hgs.tombstone.input.InputManager;
@@ -25,6 +26,7 @@ public class GameoverScreen extends BasicScreen {
 
 	private int npages;
 	private int level;
+	private Enums.PlayerType playerType = Enums.PlayerType.FERNANDO;
 	private final float pageMinusTime = 1.0f;
 	private final float pageChangeTime = 2.0f;
 	private float time = 0.0f;
@@ -34,11 +36,12 @@ public class GameoverScreen extends BasicScreen {
 
 	private Entity pageText;
 
-	public GameoverScreen(TombstoneGame game, final int level, final int npages) {
+	public GameoverScreen(TombstoneGame game, final int level, final int npages, Enums.PlayerType playerType) {
 		super(game);
 
 		this.npages = npages;
 		this.level = level;
+		this.playerType = playerType;
 
 		add(new ClickSystem());
 		add(new TweenSystem());
@@ -90,7 +93,7 @@ public class GameoverScreen extends BasicScreen {
 	}
 
 	private void continueGame(int level, int npages) {
-		game.setScreen(new GameScreen(game, level, Math.max(npages - 2, 0)));
+		game.setScreen(new GameScreen(game, level, Math.max(npages - 2, 0), playerType));
 	}
 
 	private void menuScreen() {

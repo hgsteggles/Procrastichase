@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		TexturePacker.process("../../images", "atlas", "art");
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Tombstone";
+		config.title = "Procrastichase";
 		config.width = TombstoneGame.WIDTH;
 		config.height = TombstoneGame.HEIGHT;
 

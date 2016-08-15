@@ -2,16 +2,14 @@ package hgs.tombstone.screens;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Interpolation;
 import hgs.tombstone.TombstoneGame;
-import hgs.tombstone.assets.GameArt;
-import hgs.tombstone.components.*;
-import hgs.tombstone.elements.Colors;
+import hgs.tombstone.components.BitmapFontComponent;
+import hgs.tombstone.components.ClickInterface;
+import hgs.tombstone.components.TransformComponent;
+import hgs.tombstone.elements.Enums;
 import hgs.tombstone.elements.GameMenuButton;
 import hgs.tombstone.elements.GameSettings;
-import hgs.tombstone.input.InputManager;
 import hgs.tombstone.systems.*;
-import hgs.tombstone.world.EntityFactory;
 import hgs.tombstone.world.ParticleFactory;
 import hgs.tombstone.world.WorldUI;
 
@@ -20,8 +18,11 @@ public class EndlessFinishScreen extends BasicScreen {
 	private static final float BUTTONS_Y = WORLD_HEIGHT / 4.0f + 0.5f;
 	private static final float BUTTONS_SPACING = 0.7f;
 
-	public EndlessFinishScreen(TombstoneGame game, int time) {
+	private Enums.PlayerType playerType;
+
+	public EndlessFinishScreen(TombstoneGame game, int time, Enums.PlayerType playerType) {
 		super(game);
+		this.playerType = playerType;
 
 		add(new ClickSystem());
 		add(new TweenSystem());
@@ -49,7 +50,24 @@ public class EndlessFinishScreen extends BasicScreen {
 		if (newHighscore) {
 			GameSettings.setHighScore(time);
 		}
-		add(createHighScoreMessage(newHighscore));
+		int highscore = GameSettings.getHighScore();
+
+		int rank = 4;
+		if (highscore > 180)
+			rank = 1;
+		else if (highscore > 120)
+			rank = 2;
+		else if (highscore > 60)
+			rank = 3;
+
+		if (GameSettings.endlessRank() > rank) {
+			GameSettings.setEndlessRank(rank);
+		}
+
+		System.out.println(rank);
+		System.out.println(highscore);
+
+		add(createHighScoreMessage());
 
 		addMenuItem(BUTTONS_X, BUTTONS_Y, "CONTINUE", new ClickInterface() {
 			@Override
@@ -66,7 +84,7 @@ public class EndlessFinishScreen extends BasicScreen {
 	}
 
 	private void continueGame() {
-		game.setScreen(new GameScreen(game, 5, 0));
+		game.setScreen(new GameScreen(game, 5, 0, playerType));
 	}
 
 	private void menuScreen() {
@@ -98,13 +116,22 @@ public class EndlessFinishScreen extends BasicScreen {
 		add(entity);
 	}
 
-	private Entity createHighScoreMessage(boolean newHighScore) {
+	private Entity createHighScoreMessage() {
 		Entity entity = new Entity();
 
 		BitmapFontComponent fontComp = new BitmapFontComponent();
 		fontComp.font = "retro";
 		fontComp.string = "High Score: " + WorldUI.createTimerString(GameSettings.getHighScore());
+
 		fontComp.color.set(1.0f, 0.2f, 0.2f, 1.0f);
+		int rank = GameSettings.endlessRank();
+		if (rank == 3)
+			fontComp.color.set(0.804f, 0.498f, 0.196f, 1.0f);
+		else if (rank == 2)
+			fontComp.color.set(142f/255f, 142f/255f, 142f/255f, 1.0f);
+		else if (rank == 1)
+			fontComp.color.set(218f/255, 165f/255f, 32f, 1.0f);
+
 		fontComp.centering = true;
 		fontComp.scale = 0.8f;
 		entity.add(fontComp);

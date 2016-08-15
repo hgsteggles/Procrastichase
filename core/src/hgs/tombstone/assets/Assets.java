@@ -7,8 +7,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import hgs.tombstone.components.BitmapFontComponent;
 import hgs.tombstone.components.MusicComponent;
+import hgs.tombstone.elements.FontHolder;
 
 import java.nio.file.Paths;
 
@@ -27,6 +30,11 @@ public class Assets {
 		manager.load("music/clock.mp3", Sound.class);
 		manager.load("music/page-turn.wav", Sound.class);
 
+		TextureLoader.TextureParameter texParam = new TextureLoader.TextureParameter();
+		texParam.wrapU = Texture.TextureWrap.Repeat;
+		texParam.wrapV = Texture.TextureWrap.Repeat;
+		manager.load("bg-stars.png", Texture.class, texParam);
+
 		for (int i = 1; i <= 3; ++i)
 			loadMusic(manager, i);
 	}
@@ -35,6 +43,10 @@ public class Assets {
 		TextureAtlas atlas = manager.get("atlas/art.atlas", TextureAtlas.class);
 
 		fonts.put("retro", manager.get("fonts/retro3.fnt", BitmapFont.class));
+
+		for (ObjectMap.Entry<String, BitmapFont> entry : fonts.entries()) {
+			entry.value.setUseIntegerPositions(false);
+		}
 
 		sounds.put("gameover", manager.get("music/gameover.wav", Sound.class));
 		sounds.put("clock", manager.get("music/clock.mp3", Sound.class));

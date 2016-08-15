@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import hgs.tombstone.TombstoneGame;
 import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
+import hgs.tombstone.elements.Enums;
+import hgs.tombstone.elements.GameSettings;
 import hgs.tombstone.systems.*;
 import hgs.tombstone.world.EntityFactory;
 import hgs.tombstone.world.TransitionFactory;
@@ -16,9 +18,11 @@ import hgs.tombstone.world.WorldUI;
  * Created by harry on 03/04/16.
  */
 public class ChapterCompleteScreen extends BasicScreen {
+	private Enums.PlayerType playerType;
 
-	public ChapterCompleteScreen(TombstoneGame game, int levelComplete, int npages) {
+	public ChapterCompleteScreen(TombstoneGame game, int levelComplete, int npages, Enums.PlayerType playerType) {
 		super(game);
+		this.playerType = playerType;
 
 		add(new ClickSystem());
 		add(new TweenSystem());
@@ -64,6 +68,14 @@ public class ChapterCompleteScreen extends BasicScreen {
 				game.actionResolver.unlockAchievementGPGS("CgkI4qLb0q0bEAIQAw");
 			else if (levelComplete == 4)
 				game.actionResolver.unlockAchievementGPGS("CgkI4qLb0q0bEAIQBA");
+		}
+
+		if (GameSettings.getLevelsComplete() < levelComplete) {
+			GameSettings.setLevelsComplete(levelComplete);
+		}
+
+		if (levelComplete == 4 && npages == 30) {
+			GameSettings.setCollectedAllPages(true);
 		}
 	}
 
@@ -178,7 +190,7 @@ public class ChapterCompleteScreen extends BasicScreen {
 					tickComp.finish = new EventInterface() {
 					@Override
 					public void dispatchEvent(Entity e) {
-						game.setScreen(new GameScreen(game, nextLevel, npages));
+						game.setScreen(new GameScreen(game, nextLevel, npages, playerType));
 					}
 				};
 				else

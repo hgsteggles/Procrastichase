@@ -19,19 +19,30 @@ public class GameSettings {
 		options.flush();
 	}
 
-	public static boolean isBonusLevelUnlocked() {
-		return options.getBoolean("bonus", true);
+	public static boolean collectedAllPages() {
+		return options.getBoolean("pages", false);
 	}
-	public static void setBonusLevelUnlocked() {
-		options.putBoolean("bonus", true);
+
+	public static void setCollectedAllPages(boolean value) {
+		options.putBoolean("pages", value);
 		options.flush();
 	}
 
-	public static boolean isEndlessLevelUnlocked() {
-		return options.getBoolean("bonus", true);
+	public static int endlessRank() {
+		return options.getInteger("endless-rank", 4);
 	}
-	public static void setEndlessLevelUnlocked() {
-		options.putBoolean("endless", true);
+
+	public static void setEndlessRank(int rank) {
+		options.putInteger("endless-rank", rank);
+		options.flush();
+	}
+
+	public static int getLevelsComplete() {
+		return options.getInteger("levels-complete", 0);
+	}
+
+	public static void setLevelsComplete(int nlevels) {
+		options.putInteger("levels-complete", nlevels);
 		options.flush();
 	}
 	

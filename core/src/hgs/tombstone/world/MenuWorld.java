@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import hgs.tombstone.assets.Assets;
 import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
+import hgs.tombstone.elements.Depths;
 import hgs.tombstone.elements.Enums.*;
 import hgs.tombstone.elements.GameMusic;
 import hgs.tombstone.elements.GameParameters;
@@ -34,6 +35,8 @@ public class MenuWorld {
 		engine.addEntity(WorldUI.createBottomBar());
 		engine.addEntity(WorldUI.createTopBar());
 		engine.addEntity(WorldUI.createFullBlackBG());
+		//engine.addEntity(WorldUI.createSelectCharButton(true));
+		//engine.addEntity(WorldUI.createSelectCharButton(false));
 		engine.addEntity(createCamera(worldCamera));
 
 		for (int i = 0; i < 2; ++i) {
@@ -52,7 +55,7 @@ public class MenuWorld {
 		entity.add(stateComp);
 
 		AnimationComponent animComp = new AnimationComponent();
-		animComp.animations.put(PlayerState.RUN.value(), new Animation(0.1f, GameArt.playerRunning, Animation.PlayMode.LOOP));
+		animComp.animations.put(PlayerState.RUN.value(), new Animation(0.1f, GameArt.playerRunning.get(player), Animation.PlayMode.LOOP));
 		entity.add(animComp);
 
 		TextureComponent texComp = new TextureComponent();
@@ -65,7 +68,7 @@ public class MenuWorld {
 		TransformComponent transComp = new TransformComponent();
 		float x = playerStartX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 0.5f;
-		float z = 1.0f;
+		float z = Depths.playerZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 

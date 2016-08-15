@@ -3,6 +3,8 @@ package hgs.tombstone.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import hgs.tombstone.components.*;
@@ -45,11 +47,20 @@ public class ClickSystem extends IteratingSystem {
 
 		if (ComponentMappers.textbutton.has(entity)) {
 			TextButtonComponent tc = ComponentMappers.textbutton.get(entity);
-			NinepatchComponent npc = ComponentMappers.ninepatch.get(entity);
+			Color color;
 			if (InputManager.screenInput.get(0).isPointerDown() && inside) {
-				npc.color = tc.pressed;
+				color = tc.pressed;
 			} else {
-				npc.color = tc.base;
+				color = tc.base;
+			}
+
+			NinepatchComponent npc = ComponentMappers.ninepatch.get(entity);
+			if (npc == null) {
+				TextureComponent texComp = ComponentMappers.texture.get(entity);
+				texComp.color.set(color);
+			}
+			else {
+				npc.color.set(color);
 			}
 		}
 	}

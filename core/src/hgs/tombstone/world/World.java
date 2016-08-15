@@ -10,9 +10,11 @@ import com.badlogic.gdx.utils.ObjectMap;
 import hgs.tombstone.assets.Assets;
 import hgs.tombstone.assets.GameArt;
 import hgs.tombstone.components.*;
+import hgs.tombstone.elements.Depths;
 import hgs.tombstone.elements.Enums.*;
 import hgs.tombstone.elements.GameMusic;
 import hgs.tombstone.elements.GameParameters;
+import hgs.tombstone.elements.RNG;
 import hgs.tombstone.screens.BasicScreen;
 import hgs.tombstone.systems.MovementSystem;
 import hgs.tombstone.systems.RenderingSystem;
@@ -23,7 +25,7 @@ import hgs.tombstone.systems.RenderingSystem;
 public class World {
 	private int sectionWidth = 20;
 	private int miniBossSection = 3;
-	private int bossSection = 4;
+	private int bossSection = 5;
 	private float playerStartX = 1.5f;
 	public BossType boss;
 	private MiniBossType miniBoss;
@@ -37,9 +39,10 @@ public class World {
 
 	private ObjectMap<MusicType, GameMusic> musicMap;
 
-	public World(int level, int npages) {
+	public World(int level, int npages, PlayerType player) {
 		this.npages = npages;
 		this.level = level;
+		this.player = player;
 
 		if (level == 4) {
 			bossSection = 4;
@@ -125,22 +128,25 @@ public class World {
 					engine.addEntity(EntityFactory.createTronBackground(i * sectionWidth + (j + 0.5f) * 2, levelSpeed));
 			}
 		}
-		engine.addEntity(EntityFactory.createBattleBackground(endPosX + 0.5f * BasicScreen.WORLD_WIDTH));
+		if (level != 5) {
+			engine.addEntity(EntityFactory.createBattleBackground(endPosX));
+			engine.addEntity(EntityFactory.createFramedPicture(endPosX, level));
+			if (level == 3)
+				engine.addEntity(EntityFactory.createRIP(endPosX));
+		}
+		else
+			engine.addEntity(EntityFactory.createStarryBackground());
 		engine.addEntity(EntityFactory.createBossEventBox(endPosX));
-		TextureRegion playerRegion = GameArt.playerRunning.first();
+		TextureRegion playerRegion = GameArt.playerRunning.get(PlayerType.FERNANDO).first();
 		engine.addEntity(EntityFactory.createMiniBossEventBox((miniBossSection - 1) * sectionWidth + playerStartX + playerRegion.getRegionWidth() * RenderingSystem.PIXELS_TO_WORLD));
 		engine.addEntity(createPlayer());
 
-		if (level == 3) {
-			engine.addEntity(EntityFactory.createTombstone((bossSection - 1) * sectionWidth + BasicScreen.WORLD_WIDTH - 0.5f));
-		}
-
 		if (level == 1)
-			populateLevelOne(engine);
+			populateAltLevelOne(engine);
 		else if (level == 2)
-			populateLevelTwo(engine);
+			populateAltLevelTwo(engine);
 		else if (level == 3) {
-			populateLevelThree(engine);
+			populateAltLevelThree(engine);
 		}
 	}
 
@@ -154,6 +160,167 @@ public class World {
 
 	public void removePage(int n) {
 		npages -= n;
+	}
+
+	public void populateAltLevelOne(Engine engine) {
+		float ipos = 6;
+
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createJugglingBall(ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createHangingEarth(ipos));
+		engine.addEntity(createOffsetThrownObject(BulletType.BEER, ipos));
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createJugglingBall(ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createBaubles(ipos));
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createComputerDesk(ipos));
+		ipos += 1.5;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1.5;
+		engine.addEntity(EntityFactory.createComputerDesk(ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createHangingStar(ipos));
+		engine.addEntity(createOffsetThrownObject(BulletType.SAR, ipos));
+		ipos += 6;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createTonye(ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createTableSimon(ipos));
+	}
+
+	public void populateAltLevelTwo(Engine engine) {
+		float ipos = 6;
+
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createMinifridge(ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createHangingEarth(ipos));
+		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createBall(ipos));
+		ipos += 2;
+		engine.addEntity(createOffsetThrownObject(BulletType.JUGGLINGBALL, ipos));
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createComputerDeskDouble(ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 3;
+		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
+		ipos += 0.5f;
+		engine.addEntity(EntityFactory.createBaubles(ipos));
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 0.5f;
+		engine.addEntity(createOffsetThrownObject(BulletType.JUGGLINGBALL, ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createMo(ipos));
+		ipos += 3;
+		engine.addEntity(EntityFactory.createJugglingBall(ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1;
+		engine.addEntity(createOffsetThrownObject(BulletType.JUGGLINGBALL, ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createJugglingBall(ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 0.75f;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		ipos += 1.25f;
+		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
+		ipos += 1.5f;
+		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
+		ipos += 1f;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		ipos += 1f;
+		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
+
+		ipos += 6;
+		engine.addEntity(EntityFactory.createCat(ipos, levelSpeed));
+		engine.addEntity(EntityFactory.createKathryn(ipos));
+		ipos += 0.75f;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+	}
+
+	public void populateAltLevelThree(Engine engine) {
+		float ipos = 6;
+
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 0.8f;
+		engine.addEntity(EntityFactory.createAbi(ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createDrawers(ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createHangingEarth(ipos));
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		ipos += 0.25f;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 0.25f;
+		engine.addEntity(EntityFactory.createHangingStar(ipos));
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createBaubles(ipos));
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createChairRight(ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1;
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createChairRight(ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createComputerDesk(ipos));
+		ipos += 2;
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 1.5;
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		ipos += 1;
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1.5f;
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPage(ipos, true));
+		ipos += 1;
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createPin(ipos));
+		ipos += 2;
+		engine.addEntity(EntityFactory.createDrawers(ipos));
+		ipos += 1.5;
+		engine.addEntity(EntityFactory.createPage(ipos, false));
+		engine.addEntity(EntityFactory.createDrawers(ipos));
+		ipos += 1.5;
+		engine.addEntity(EntityFactory.createDrawers(ipos));
+		ipos += 2;
+		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
 	}
 
 	public void populateLevelOne(Engine engine) {
@@ -287,6 +454,12 @@ public class World {
 		engine.addEntity(EntityFactory.createPage(ipos, true));
 	}
 
+	public Entity createOffsetThrownObject(BulletType bulletType, float posX) {
+		float bulletSpeed = 0.5f * GameParameters.baseProjectileSpeed;
+		float offsetX = posX + (posX - playerStartX) * bulletSpeed / levelSpeed;
+		return EntityFactory.createThrownObject(bulletType, offsetX, -bulletSpeed);
+	}
+
 	public Entity createLightning() {
 		float posX = (bossSection - 1) * sectionWidth + BasicScreen.WORLD_WIDTH - 2 + playerStartX;
 		return EntityFactory.createLightning(posX);
@@ -314,7 +487,7 @@ public class World {
 		TransformComponent transComp = new TransformComponent();
 		float x = (miniBossSection - 1) * sectionWidth + BasicScreen.WORLD_WIDTH + playerStartX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 0.5f;
-		float z = 1.0f;
+		float z = Depths.enemyZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 
@@ -348,6 +521,10 @@ public class World {
 		miniComp.who = miniBoss;
 		entity.add(miniComp);
 
+		if (miniBoss == MiniBossType.MARC) {
+			entity.add(ParticleFactory.createHoverEmitter(1.0f));
+		}
+
 		return entity;
 	}
 
@@ -362,10 +539,15 @@ public class World {
 		entity.add(stateComp);
 
 		AnimationComponent animComp = new AnimationComponent();
+		BossType bossSprite = boss;
+		if (boss == BossType.ENDLESS) {
+			float spriteRNG = RNG.genInt(2);
+			bossSprite = spriteRNG == 1 ? BossType.STUART : BossType.TOM;
+		}
 		if (boss != BossType.RENE && boss != BossType.ENDLESS)
-			animComp.animations.put(BossState.ENTER.value(), new Animation(0.15f, GameArt.bossEnter.get(boss), Animation.PlayMode.LOOP));
-		animComp.animations.put(BossState.PRIME.value(), new Animation(0.1f, GameArt.bossPrime.get(boss), Animation.PlayMode.NORMAL));
-		animComp.animations.put(BossState.THROW.value(), new Animation(0.1f, GameArt.bossThrow.get(boss), Animation.PlayMode.NORMAL));
+			animComp.animations.put(BossState.ENTER.value(), new Animation(0.15f, GameArt.bossEnter.get(bossSprite), Animation.PlayMode.LOOP));
+		animComp.animations.put(BossState.PRIME.value(), new Animation(0.1f, GameArt.bossPrime.get(bossSprite), Animation.PlayMode.NORMAL));
+		animComp.animations.put(BossState.THROW.value(), new Animation(0.1f, GameArt.bossThrow.get(bossSprite), Animation.PlayMode.NORMAL));
 		entity.add(animComp);
 
 		TextureComponent texComp = new TextureComponent();
@@ -380,7 +562,7 @@ public class World {
 		TransformComponent transComp = new TransformComponent();
 		float x = (bossSection - 1) * sectionWidth + BasicScreen.WORLD_WIDTH - 2 + playerStartX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 0.5f;
-		float z = 1.0f;
+		float z = Depths.enemyZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 
@@ -392,13 +574,13 @@ public class World {
 
 		BossComponent bossComp = new BossComponent();
 		bossComp.who = boss;
-		bossComp.health = 1;
+		bossComp.health = 10;
 		entity.add(bossComp);
 
 		if (boss == BossType.RENE || boss == BossType.ENDLESS) {
 			TweenComponent tweenComponent = new TweenComponent();
 			TweenSpec tweenSpec = new TweenSpec();
-			tweenSpec.period = 1.0f;
+			tweenSpec.period = 0.5f;
 			tweenSpec.tweenInterface = new TweenInterface() {
 				@Override
 				public void applyTween(Entity e, float a) {
@@ -431,11 +613,11 @@ public class World {
 		entity.add(stateComp);
 
 		AnimationComponent animComp = new AnimationComponent();
-		animComp.animations.put(PlayerState.IDLE.value(), new Animation(0.1f, GameArt.playerIdle, Animation.PlayMode.NORMAL));
-		animComp.animations.put(PlayerState.JUMP.value(), new Animation(0.1f, GameArt.playerJumping, Animation.PlayMode.NORMAL));
-		animComp.animations.put(PlayerState.RUN.value(), new Animation(0.1f, GameArt.playerRunning, Animation.PlayMode.LOOP));
-		animComp.animations.put(PlayerState.SLIDE.value(), new Animation(0.1f, GameArt.playerSliding, Animation.PlayMode.NORMAL));
-		animComp.animations.put(PlayerState.DEAD.value(), new Animation(0.1f, GameArt.playerSliding, Animation.PlayMode.NORMAL));
+		animComp.animations.put(PlayerState.IDLE.value(), new Animation(0.1f, GameArt.playerIdle.get(player), Animation.PlayMode.NORMAL));
+		animComp.animations.put(PlayerState.JUMP.value(), new Animation(0.1f, GameArt.playerJumping.get(player), Animation.PlayMode.NORMAL));
+		animComp.animations.put(PlayerState.RUN.value(), new Animation(0.1f, GameArt.playerRunning.get(player), Animation.PlayMode.LOOP));
+		animComp.animations.put(PlayerState.SLIDE.value(), new Animation(0.1f, GameArt.playerSliding.get(player), Animation.PlayMode.NORMAL));
+		animComp.animations.put(PlayerState.DEAD.value(), new Animation(0.1f, GameArt.playerSliding.get(player), Animation.PlayMode.NORMAL));
 		entity.add(animComp);
 
 		TextureComponent texComp = new TextureComponent();
@@ -448,7 +630,7 @@ public class World {
 		TransformComponent transComp = new TransformComponent();
 		float x = playerStartX;
 		float y = BasicScreen.WORLD_HEIGHT / 2.0f - 0.5f;
-		float z = 1.0f;
+		float z = Depths.playerZ;
 		transComp.body.initPosition(x, y, z);
 		entity.add(transComp);
 
@@ -458,8 +640,8 @@ public class World {
 
 		CollisionComponent collComp = new CollisionComponent();
 		collComp.type = CollisionType.PLAYER;
-		collComp.rect.setSize(0.9f * texComp.size.x, 0.9f * texComp.size.y);
-		collComp.rect.setCenter(x, y);
+		collComp.rect.setSize(0.5f * texComp.size.x, 0.9f * texComp.size.y);
+		collComp.rect.setCenter(x + 0.1f, y);
 		entity.add(collComp);
 
 		entity.add(new JumpComponent());

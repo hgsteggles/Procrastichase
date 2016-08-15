@@ -10,6 +10,6 @@ public class SlideComponent implements Component {
 	public float maxSlideTime = GameParameters.baseMaxSlideTime;
 	public float minSlideTime = GameParameters.baseMinSlideTime;
 	public boolean slideHeld = false;
-	public boolean slideReleased = false;
+	public boolean slideReleased = true;
 	public int pointer = 0;
 }

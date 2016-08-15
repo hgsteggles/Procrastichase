@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import hgs.tombstone.components.*;
 import hgs.tombstone.elements.Enums.*;
 import hgs.tombstone.world.EntityFactory;
+import hgs.tombstone.world.ParticleFactory;
 import hgs.tombstone.world.SoundFactory;
 import hgs.tombstone.world.World;
 
@@ -50,6 +51,27 @@ public class CollisionSystem extends IteratingSystem {
 				else if (cc2.type == CollisionType.MINI_BOSS_AREA
 						&& cc1.rect.overlaps(cc2.rect)) {
 					getEngine().addEntity(EntityFactory.createGameState(GameState.MINI_BOSS));
+				}
+				else if (cc2.type == CollisionType.PEE
+						&& cc1.rect.overlaps(cc2.rect)) {
+
+					entity.add(ParticleFactory.createWetHairEmitter());
+					if (!ComponentMappers.tween.has(entity))
+						entity.add(new TweenComponent());
+					TweenComponent twc = ComponentMappers.tween.get(entity);
+					TweenSpec tspec = new TweenSpec();
+					tspec.period = 4.0f;
+					tspec.cycle = TweenSpec.Cycle.ONCE;
+					tspec.tweenInterface = new TweenInterface() {
+						@Override
+						public void applyTween(Entity e, float a) {}
+
+						@Override
+						public void endTween(Entity e) {
+							e.remove(EmitterComponent.class);
+						}
+					};
+					twc.tweenSpecs.add(tspec);
 				}
 			}
 			else if (cc1.type == CollisionType.PLAYER_BULLET

@@ -170,7 +170,7 @@ public class GameStateSystem extends EntitySystem {
 		for (Entity boss : bosses) {
 			boss.remove(GunComponent.class);
 			boss.remove(CollisionComponent.class);
-			boss.remove(BossComponent.class);
+			//boss.remove(BossComponent.class);
 		}
 
 		for (Entity m : music) {
@@ -210,6 +210,7 @@ public class GameStateSystem extends EntitySystem {
 			player.remove(ControlComponent.class);
 			player.remove(SlideComponent.class);
 			player.remove(CollisionComponent.class);
+			player.remove(TweenComponent.class);
 		}
 
 		//getEngine().addEntity(EntityFactory.createGameOverSound());

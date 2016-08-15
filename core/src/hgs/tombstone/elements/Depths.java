@@ -12,11 +12,12 @@ public class Depths {
 	public static float screenbgZ = 0;
 
 
-	public static float hudZ = 50;
-	public static float worldoverlayZ = 40;
+	public static float hudZ = 35;
+	public static float worldoverlayZ = 30;
+	public static float enemyZ = 25;
 	public static float objectZ = 20;
-	public static float playerZ = 10;
-	public static float bulletZ = 8;
-	public static float particleZ = 7;
+	public static float bulletZ = 15;
+	public static float particleZ = 10;
+	public static float playerZ = 5;
 	public static float worldbgZ = 0;
 }

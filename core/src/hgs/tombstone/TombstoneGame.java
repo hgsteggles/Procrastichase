@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import hgs.tombstone.assets.Assets;
 import hgs.tombstone.assets.GameArt;
+import hgs.tombstone.elements.FontHolder;
 import hgs.tombstone.elements.GameSettings;
 import hgs.tombstone.elements.ActionResolver;
 import hgs.tombstone.input.InputManager;
@@ -57,6 +58,9 @@ public class TombstoneGame extends ApplicationAdapter {
 
 			double frameTime = Gdx.graphics.getDeltaTime();
 
+			if (frameTime > 0.25)
+				frameTime = 0.25;
+
 			accumulator += frameTime;
 
 			while (accumulator >= dt) {
@@ -65,7 +69,7 @@ public class TombstoneGame extends ApplicationAdapter {
 				accumulator -= dt;
 			}
 
-			screen.render(0);
+			screen.render((float)(accumulator / dt));
 
 
 			if (soundtrack != null) {

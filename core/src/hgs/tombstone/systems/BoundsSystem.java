@@ -23,13 +23,21 @@ public class BoundsSystem extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 		TransformComponent tc = ComponentMappers.transform.get(entity);
+		BoundsComponent bc = ComponentMappers.bounds.get(entity);
 
-		if (tc.body.getPosition().x < camera.position.x - camera.viewportWidth / 2.0f - 2
-			|| tc.body.getPosition().x > camera.position.x + camera.viewportWidth / 2.0f + 2
-			|| tc.body.getPosition().y < 1.8
-			|| tc.body.getPosition().y > 4.2) {
-
-			getEngine().removeEntity(entity);
+		if (!within(tc.body.getPosition().x, tc.body.getPosition().y)) {
+			if (bc.entered)
+				getEngine().removeEntity(entity);
 		}
+		else {
+			bc.entered = true;
+		}
+	}
+
+	private boolean within(float x, float y) {
+		return !(x < camera.position.x - camera.viewportWidth / 2.0f - 2
+				|| x > camera.position.x + camera.viewportWidth / 2.0f + 2
+				|| y < 1.8
+				|| y > 4.2);
 	}
 }

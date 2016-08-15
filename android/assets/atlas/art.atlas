@@ -6,7 +6,7 @@ filter: Nearest,Nearest
 repeat: none
 abi
   rotate: false
-  xy: 2016, 152
+  xy: 1422, 62
   size: 26, 50
   orig: 26, 50
   offset: 0, 0
@@ -20,49 +20,49 @@ background
   index: -1
 ball
   rotate: false
-  xy: 2, 3
+  xy: 1538, 229
   size: 25, 25
   orig: 25, 25
   offset: 0, 0
   index: -1
 baubles
   rotate: false
-  xy: 316, 11
+  xy: 502, 11
   size: 26, 39
   orig: 26, 39
   offset: 0, 0
   index: -1
 beer
   rotate: false
-  xy: 29, 8
+  xy: 1975, 234
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 blank-character
   rotate: false
-  xy: 1084, 52
+  xy: 722, 40
   size: 26, 50
   orig: 26, 50
   offset: 0, 0
   index: -1
 book
   rotate: false
-  xy: 1426, 54
+  xy: 1004, 54
   size: 300, 200
   orig: 300, 200
   offset: 0, 0
   index: -1
 bullet-box
   rotate: false
-  xy: 1040, 34
+  xy: 983, 105
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 button-border
   rotate: false
-  xy: 95, 21
+  xy: 1484, 186
   size: 7, 7
   split: 1, 1, 1, 1
   orig: 7, 7
@@ -70,679 +70,805 @@ button-border
   index: -1
 button-pixelart
   rotate: false
-  xy: 1728, 60
+  xy: 1306, 162
   size: 128, 92
   orig: 128, 92
   offset: 0, 0
   index: -1
 cat
   rotate: false
-  xy: 1312, 62
+  xy: 739, 92
   size: 26, 50
   orig: 26, 50
   offset: 0, 0
   index: 1
 cat
   rotate: false
-  xy: 1340, 62
+  xy: 750, 40
   size: 26, 50
   orig: 26, 50
   offset: 0, 0
   index: 2
 chair-left
   rotate: false
-  xy: 922, 23
-  size: 16, 27
-  orig: 16, 27
+  xy: 983, 123
+  size: 16, 29
+  orig: 16, 29
+  offset: 0, 0
+  index: -1
+computer-desk
+  rotate: false
+  xy: 240, 13
+  size: 48, 37
+  orig: 48, 37
+  offset: 0, 0
+  index: -1
+computer-desk-double
+  rotate: false
+  xy: 1484, 195
+  size: 48, 37
+  orig: 48, 37
   offset: 0, 0
   index: -1
 diamond
   rotate: false
-  xy: 1098, 104
+  xy: 686, 92
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 drawers
   rotate: false
-  xy: 344, 8
+  xy: 530, 8
   size: 22, 42
   orig: 22, 42
   offset: 0, 0
   index: -1
 endbattle-bg
   rotate: false
-  xy: 1004, 114
-  size: 420, 140
-  orig: 420, 140
+  xy: 2, 52
+  size: 526, 100
+  orig: 526, 100
   offset: 0, 0
   index: -1
 fernando-idle
   rotate: false
-  xy: 1368, 62
-  size: 26, 50
-  orig: 26, 50
+  xy: 1386, 62
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: -1
 fernando-run
   rotate: false
-  xy: 1368, 62
-  size: 26, 50
-  orig: 26, 50
+  xy: 1386, 62
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 1
 fernando-jump
   rotate: false
-  xy: 1396, 62
-  size: 26, 50
-  orig: 26, 50
+  xy: 650, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: -1
 fernando-run
   rotate: false
-  xy: 1396, 62
-  size: 26, 50
-  orig: 26, 50
+  xy: 650, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 5
 fernando-run
   rotate: false
-  xy: 1112, 10
-  size: 26, 50
-  orig: 26, 50
+  xy: 703, 92
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 2
 fernando-run
   rotate: false
-  xy: 1140, 10
-  size: 26, 50
-  orig: 26, 50
+  xy: 686, 40
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 3
 fernando-run
   rotate: false
-  xy: 1168, 10
-  size: 26, 50
-  orig: 26, 50
+  xy: 767, 102
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 4
 fernando-run
   rotate: false
-  xy: 1196, 10
-  size: 26, 50
-  orig: 26, 50
+  xy: 803, 102
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 6
+fernando-sit
+  rotate: false
+  xy: 839, 102
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 fernando-slide
   rotate: false
-  xy: 1224, 10
-  size: 26, 50
-  orig: 26, 50
+  xy: 875, 102
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: -1
 fireball
   rotate: false
-  xy: 1532, 36
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-fireball-down
-  rotate: false
-  xy: 1058, 34
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-fireball-up
-  rotate: false
-  xy: 1550, 36
+  xy: 1899, 209
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 flame
   rotate: false
-  xy: 1532, 8
+  xy: 744, 144
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
+frame-crab
+  rotate: false
+  xy: 1386, 114
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
+frame-horsehead
+  rotate: false
+  xy: 192, 4
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
+frame-ring
+  rotate: false
+  xy: 1436, 186
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
+frame-sombrero
+  rotate: false
+  xy: 113, 4
+  size: 77, 46
+  orig: 77, 46
+  offset: 0, 0
+  index: -1
 greg-sit-prime
   rotate: false
-  xy: 216, 7
+  xy: 402, 7
   size: 23, 43
   orig: 23, 43
   offset: 0, 0
   index: -1
 greg-sit-throw
   rotate: false
-  xy: 241, 7
+  xy: 427, 7
   size: 23, 43
   orig: 23, 43
   offset: 0, 0
   index: -1
-hammer
-  rotate: false
-  xy: 1532, 18
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
 hang-earth
   rotate: false
-  xy: 1006, 27
+  xy: 1506, 5
   size: 15, 23
   orig: 15, 23
   offset: 0, 0
   index: -1
 hang-star
   rotate: false
-  xy: 1023, 27
+  xy: 1935, 202
   size: 15, 23
   orig: 15, 23
   offset: 0, 0
   index: -1
+harry-idle
+  rotate: false
+  xy: 911, 102
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 harry-run
   rotate: false
-  xy: 1926, 102
-  size: 38, 50
-  orig: 38, 50
+  xy: 911, 102
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 1
+harry-jump
+  rotate: false
+  xy: 947, 102
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 harry-run
   rotate: false
-  xy: 1004, 52
-  size: 38, 50
-  orig: 38, 50
+  xy: 947, 102
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 5
+harry-run
+  rotate: false
+  xy: 778, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 2
 harry-run
   rotate: false
-  xy: 1966, 102
-  size: 38, 50
-  orig: 38, 50
+  xy: 814, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 3
 harry-run
   rotate: false
-  xy: 1044, 52
-  size: 38, 50
-  orig: 38, 50
+  xy: 850, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 4
 harry-run
   rotate: false
-  xy: 1926, 50
-  size: 38, 50
-  orig: 38, 50
+  xy: 886, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 6
+harry-sit
+  rotate: false
+  xy: 922, 50
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 harry-slide
   rotate: false
-  xy: 1966, 50
-  size: 38, 50
-  orig: 38, 50
+  xy: 958, 50
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: -1
 health
   rotate: false
-  xy: 1004, 104
+  xy: 650, 144
   size: 92, 8
   orig: 92, 8
   offset: 0, 0
   index: -1
 health-bar
   rotate: false
-  xy: 2, 30
+  xy: 1436, 234
   size: 100, 20
   orig: 100, 20
   offset: 0, 0
   index: -1
-instructions
-  rotate: false
-  xy: 1728, 154
-  size: 200, 100
-  orig: 200, 100
-  offset: 0, 0
-  index: -1
 iva-sit-prime
   rotate: false
-  xy: 162, 7
+  xy: 348, 7
   size: 25, 43
   orig: 25, 43
   offset: 0, 0
   index: -1
 iva-sit-throw
   rotate: false
-  xy: 189, 7
+  xy: 375, 7
   size: 25, 43
   orig: 25, 43
   offset: 0, 0
   index: -1
+jake-idle
+  rotate: false
+  xy: 994, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 jake-run
   rotate: false
-  xy: 2006, 100
-  size: 38, 50
-  orig: 38, 50
+  xy: 994, 2
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 1
-jake-run
+jake-jump
   rotate: false
-  xy: 2006, 48
-  size: 38, 50
-  orig: 38, 50
+  xy: 1030, 2
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
-  index: 2
+  index: -1
 jake-run
   rotate: false
-  xy: 1112, 62
-  size: 38, 50
-  orig: 38, 50
-  offset: 0, 0
-  index: 3
-jake-run
-  rotate: false
-  xy: 1152, 62
-  size: 38, 50
-  orig: 38, 50
-  offset: 0, 0
-  index: 4
-jake-run
-  rotate: false
-  xy: 1192, 62
-  size: 38, 50
-  orig: 38, 50
+  xy: 1030, 2
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 5
 jake-run
   rotate: false
-  xy: 1232, 62
-  size: 38, 50
-  orig: 38, 50
+  xy: 1066, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 2
+jake-run
+  rotate: false
+  xy: 1102, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 3
+jake-run
+  rotate: false
+  xy: 1138, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 4
+jake-run
+  rotate: false
+  xy: 1174, 2
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: 6
+jake-sit
+  rotate: false
+  xy: 1210, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 jake-slide
   rotate: false
-  xy: 1272, 62
-  size: 38, 50
-  orig: 38, 50
+  xy: 1246, 2
+  size: 34, 50
+  orig: 34, 50
   offset: 0, 0
   index: -1
 jugglingball
   rotate: false
-  xy: 940, 30
+  xy: 1997, 234
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 julian-stand
   rotate: false
-  xy: 368, 7
+  xy: 554, 7
   size: 22, 43
   orig: 22, 43
   offset: 0, 0
   index: -1
 julian-stand-blink
   rotate: false
-  xy: 392, 7
+  xy: 578, 7
   size: 22, 43
   orig: 22, 43
   offset: 0, 0
   index: -1
 julian-stand-prime
   rotate: false
-  xy: 416, 7
+  xy: 602, 7
   size: 22, 43
   orig: 22, 43
   offset: 0, 0
   index: -1
 julian-stand-throw
   rotate: false
-  xy: 440, 7
+  xy: 626, 7
   size: 22, 43
   orig: 22, 43
   offset: 0, 0
   index: -1
+karim-idle
+  rotate: false
+  xy: 1282, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
+karim-run
+  rotate: false
+  xy: 1282, 2
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 1
+karim-jump
+  rotate: false
+  xy: 1318, 8
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
+karim-run
+  rotate: false
+  xy: 1318, 8
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 5
+karim-run
+  rotate: false
+  xy: 1354, 8
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 2
+karim-run
+  rotate: false
+  xy: 1390, 10
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 3
+karim-run
+  rotate: false
+  xy: 1426, 10
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 4
+karim-run
+  rotate: false
+  xy: 1436, 134
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: 6
+karim-sit
+  rotate: false
+  xy: 1472, 134
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
+karim-slide
+  rotate: false
+  xy: 1508, 143
+  size: 34, 50
+  orig: 34, 50
+  offset: 0, 0
+  index: -1
 kathryn-sit
   rotate: false
-  xy: 818, 23
+  xy: 1565, 227
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
 kathryn-sit-blink
   rotate: false
-  xy: 844, 23
+  xy: 1591, 227
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
+knife
+  rotate: false
+  xy: 2019, 234
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
 marc-stand-prime
   rotate: false
-  xy: 104, 6
+  xy: 290, 6
   size: 27, 44
   orig: 27, 44
   offset: 0, 0
   index: -1
 marc-stand-throw
   rotate: false
-  xy: 133, 6
+  xy: 319, 6
   size: 27, 44
   orig: 27, 44
   offset: 0, 0
   index: -1
 melvin-stand
   rotate: false
-  xy: 464, 7
+  xy: 650, 5
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 melvin-stand-blink
   rotate: false
-  xy: 487, 7
+  xy: 1544, 150
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 melvin-stand-prime
   rotate: false
-  xy: 510, 7
+  xy: 1669, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 melvin-stand-throw
   rotate: false
-  xy: 533, 7
+  xy: 1692, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 milk
   rotate: false
-  xy: 51, 8
+  xy: 1462, 8
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
-mo
+minifridge
   rotate: false
-  xy: 2016, 204
-  size: 29, 50
-  orig: 29, 50
+  xy: 650, 102
+  size: 51, 40
+  orig: 51, 40
   offset: 0, 0
   index: -1
 mo-sit
   rotate: false
-  xy: 740, 18
+  xy: 1534, 195
   size: 24, 32
   orig: 24, 32
   offset: 0, 0
   index: -1
 mo-sit-rose
   rotate: false
-  xy: 766, 18
+  xy: 1617, 222
   size: 24, 32
   orig: 24, 32
   offset: 0, 0
   index: -1
 mo-sit-rose-yes
   rotate: false
-  xy: 792, 18
+  xy: 1643, 222
   size: 24, 32
   orig: 24, 32
   offset: 0, 0
   index: -1
 music-note
   rotate: false
-  xy: 1076, 34
+  xy: 1917, 209
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pasty
   rotate: false
-  xy: 1094, 34
+  xy: 1952, 214
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+pepperoni
+  rotate: false
+  xy: 1417, 2
+  size: 6, 6
+  orig: 6, 6
+  offset: 0, 0
+  index: -1
 pin
   rotate: false
-  xy: 740, 10
+  xy: 1390, 2
   size: 25, 6
   orig: 25, 6
   offset: 0, 0
   index: -1
+pizza
+  rotate: false
+  xy: 1951, 232
+  size: 22, 22
+  orig: 22, 22
+  offset: 0, 0
+  index: -1
 rene-stand
   rotate: false
-  xy: 556, 7
+  xy: 1715, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 rene-stand-blink
   rotate: false
-  xy: 579, 7
+  xy: 1738, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 rene-stand-prime
   rotate: false
-  xy: 602, 7
+  xy: 1761, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 rene-stand-throw
   rotate: false
-  xy: 625, 7
+  xy: 1784, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
+rip
+  rotate: false
+  xy: 2, 2
+  size: 109, 48
+  orig: 109, 48
+  offset: 0, 0
+  index: -1
 rob-sit-prime
   rotate: false
-  xy: 266, 6
+  xy: 452, 6
   size: 23, 44
   orig: 23, 44
   offset: 0, 0
   index: -1
 rob-sit-throw
   rotate: false
-  xy: 291, 6
+  xy: 477, 6
   size: 23, 44
   orig: 23, 44
   offset: 0, 0
   index: -1
 rose
   rotate: false
-  xy: 1568, 36
+  xy: 1952, 196
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 sai
   rotate: false
-  xy: 962, 30
+  xy: 1484, 8
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
+select-char-button
+  rotate: false
+  xy: 1306, 60
+  size: 44, 100
+  orig: 44, 100
+  offset: 0, 0
+  index: -1
 sleepZ
   rotate: false
-  xy: 1550, 18
+  xy: 778, 32
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 stacked-table
   rotate: false
-  xy: 1982, 154
+  xy: 582, 52
   size: 32, 100
   orig: 32, 100
   offset: 0, 0
   index: -1
 stuart-stand-prime
   rotate: false
-  xy: 1252, 10
+  xy: 1450, 82
   size: 26, 50
   orig: 26, 50
   offset: 0, 0
   index: -1
 stuart-stand-throw
   rotate: false
-  xy: 1280, 10
+  xy: 1478, 82
   size: 26, 50
   orig: 26, 50
   offset: 0, 0
   index: -1
 sven-stand
   rotate: false
-  xy: 648, 7
+  xy: 1807, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 sven-stand-blink
   rotate: false
-  xy: 671, 7
+  xy: 1830, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 sven-stand-prime
   rotate: false
-  xy: 694, 7
+  xy: 1853, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 sven-stand-throw
   rotate: false
-  xy: 717, 7
+  xy: 1876, 211
   size: 21, 43
   orig: 21, 43
   offset: 0, 0
   index: -1
 table
   rotate: false
-  xy: 1858, 52
+  xy: 1352, 60
   size: 32, 100
   orig: 32, 100
   offset: 0, 0
   index: -1
 table-simon
   rotate: false
-  xy: 1892, 52
+  xy: 616, 52
   size: 32, 100
   orig: 32, 100
   offset: 0, 0
   index: -1
-template-sit
-  rotate: false
-  xy: 1308, 10
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: -1
-template-sit-prime
-  rotate: false
-  xy: 1336, 10
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: -1
-template-sit-throw
-  rotate: false
-  xy: 1364, 10
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: -1
-template-stand-prime
-  rotate: false
-  xy: 1392, 10
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: -1
-template-stand-throw
-  rotate: false
-  xy: 1420, 2
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: -1
-template-walk
-  rotate: false
-  xy: 1448, 2
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: 1
-template-walk
-  rotate: false
-  xy: 1476, 2
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: 2
-template-walk
-  rotate: false
-  xy: 1504, 2
-  size: 26, 50
-  orig: 26, 50
-  offset: 0, 0
-  index: 3
 thesis-page
   rotate: false
-  xy: 73, 8
+  xy: 1560, 205
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 thesis-page-black
   rotate: false
-  xy: 984, 30
+  xy: 1582, 205
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
+tom-stand-prime
+  rotate: false
+  xy: 1462, 30
+  size: 26, 50
+  orig: 26, 50
+  offset: 0, 0
+  index: -1
+tom-stand-throw
+  rotate: false
+  xy: 1490, 30
+  size: 26, 50
+  orig: 26, 50
+  offset: 0, 0
+  index: -1
 tombstone
   rotate: false
-  xy: 1930, 154
+  xy: 530, 52
   size: 50, 100
   orig: 50, 100
   offset: 0, 0
   index: -1
 tonye-sit
   rotate: false
-  xy: 870, 23
+  xy: 1899, 227
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
 tonye-sit-blink
   rotate: false
-  xy: 896, 23
+  xy: 1925, 227
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
-tron-background
-  rotate: false
-  xy: 2, 52
-  size: 1000, 100
-  orig: 1000, 100
-  offset: 0, 0
-  index: -1
 white-button-border
   rotate: false
-  xy: 95, 12
+  xy: 1493, 186
   size: 7, 7
   split: 1, 1, 1, 1
   orig: 7, 7
@@ -750,68 +876,13 @@ white-button-border
   index: -1
 white-pixel
   rotate: false
-  xy: 1728, 57
+  xy: 1001, 151
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 
 art2.png
-size: 256,64
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-karim-run-1
-  rotate: false
-  xy: 2, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-karim-run-2
-  rotate: false
-  xy: 30, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-karim-run-3
-  rotate: false
-  xy: 58, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-karim-run-4
-  rotate: false
-  xy: 86, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-karim-run-5
-  rotate: false
-  xy: 114, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-karim-run-6
-  rotate: false
-  xy: 142, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-karim-slide
-  rotate: false
-  xy: 170, 2
-  size: 26, 44
-  orig: 26, 44
-  offset: 0, 0
-  index: -1
-
-art3.png
 size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
@@ -824,7 +895,7 @@ tron-bg
   offset: 0, 0
   index: -1
 
-art4.png
+art3.png
 size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
@@ -838,7 +909,7 @@ Background
   index: -1
 lightline
   rotate: false
-  xy: 504, 20
+  xy: 708, 42
   size: 150, 32
   orig: 150, 32
   offset: 0, 0
@@ -869,6 +940,20 @@ sheepstare
   xy: 504, 490
   size: 512, 512
   orig: 512, 512
+  offset: 0, 0
+  index: -1
+sound-off
+  rotate: false
+  xy: 906, 280
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+sound-on
+  rotate: false
+  xy: 764, 178
+  size: 100, 100
+  orig: 100, 100
   offset: 0, 0
   index: -1
 speech-down
@@ -908,55 +993,55 @@ tournament-button-on
   index: -1
 tron-boost
   rotate: false
-  xy: 906, 280
+  xy: 866, 178
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-delay
   rotate: false
-  xy: 764, 178
+  xy: 504, 156
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-down
   rotate: false
-  xy: 866, 178
+  xy: 606, 156
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-sawtooth
   rotate: false
-  xy: 504, 156
+  xy: 708, 76
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-square
   rotate: false
-  xy: 606, 156
+  xy: 504, 54
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-up
   rotate: false
-  xy: 708, 76
+  xy: 606, 54
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 tron-wave
   rotate: false
-  xy: 504, 54
+  xy: 810, 76
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 
-art5.png
+art4.png
 size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
@@ -983,7 +1068,7 @@ bolt
   offset: 0, 0
   index: 3
 
-art6.png
+art5.png
 size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
@@ -1010,15 +1095,15 @@ bolt
   offset: 0, 0
   index: 6
 
-art7.png
+art6.png
 size: 1024,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-sheepstaretext
+procrastichase
   rotate: false
   xy: 2, 2
-  size: 1000, 200
-  orig: 1000, 200
+  size: 800, 200
+  orig: 800, 200
   offset: 0, 0
   index: -1

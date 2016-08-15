@@ -46,4 +46,6 @@ public class ComponentMappers {
 	public static ComponentMapper<SawtoothComponent> sawtooth = ComponentMapper.getFor(SawtoothComponent.class);
 	public static ComponentMapper<HeadsUpDisplayComponent> hud = ComponentMapper.getFor(HeadsUpDisplayComponent.class);
 	public static ComponentMapper<ControlButtonComponent> controlbutton = ComponentMapper.getFor(ControlButtonComponent.class);
+	public static ComponentMapper<CharacterChangeEvent> charchange = ComponentMapper.getFor(CharacterChangeEvent.class);
+	public static ComponentMapper<BoundsComponent> bounds = ComponentMapper.getFor(BoundsComponent.class);
 }
