@@ -314,10 +314,10 @@ public class World {
 		engine.addEntity(EntityFactory.createPin(ipos));
 		ipos += 2;
 		engine.addEntity(EntityFactory.createDrawers(ipos));
-		ipos += 1.5;
+		ipos += 1.75;
 		engine.addEntity(EntityFactory.createPage(ipos, false));
 		engine.addEntity(EntityFactory.createDrawers(ipos));
-		ipos += 1.5;
+		ipos += 1.75;
 		engine.addEntity(EntityFactory.createDrawers(ipos));
 		ipos += 2;
 		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));

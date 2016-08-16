@@ -41,7 +41,6 @@ public class EndlessSystem extends IteratingSystem {
 		else
 			gunComp.fireRate = 1.0f;
 
-
 		endComp.time += deltaTime;
 	}
 }

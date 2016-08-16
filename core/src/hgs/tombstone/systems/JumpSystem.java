@@ -38,7 +38,7 @@ public class JumpSystem extends IteratingSystem {
 		StateComponent stateComp = ComponentMappers.state.get(entity);
 		stateComp.set(PlayerState.JUMP.value());
 
-		final float T = 0.3f * jumpComp.minJumpTime;
+		final float T = 0.75f * jumpComp.minJumpTime;
 		final float y0 = 0.5f * BasicScreen.WORLD_HEIGHT - 0.5f;
 		final float H = 0.5f * BasicScreen.WORLD_HEIGHT + 0.5f;
 		final float u = 2.0f * (H - y0) / T;

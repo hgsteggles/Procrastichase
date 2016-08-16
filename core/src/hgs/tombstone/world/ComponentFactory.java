@@ -41,9 +41,9 @@ public class ComponentFactory {
 		if (who == Enums.BossType.JULIAN)
 			gunComp.fireRate = 1.4f;
 		if (who == Enums.BossType.RENE)
-			gunComp.fireRate = 1.6f;
+			gunComp.fireRate = 1.5f;
 		if (who == Enums.BossType.SVEN)
-			gunComp.fireRate = 1.6f;
+			gunComp.fireRate = 1.5f;
 
 		gunComp.shootInterface = new GunInterface() {
 			@Override
