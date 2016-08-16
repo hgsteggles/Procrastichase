@@ -12,7 +12,6 @@ import hgs.tombstone.world.World;
 public class GameScreen extends BasicScreen {
 	private World world;
 	private int level;
-	private boolean doublespeed = false;
 	private int old_npages;
 	private Enums.PlayerType playerType;
 
@@ -58,8 +57,6 @@ public class GameScreen extends BasicScreen {
 
 	@Override
 	public void update(float delta) {
-		if (doublespeed)
-			delta *= 4;
 		super.update(delta);
 
 		if (engine.getSystem(GameStateSystem.class).screenChange == GameStateSystem.SCREEN_GAMEOVER) {
@@ -70,11 +67,6 @@ public class GameScreen extends BasicScreen {
 		}
 		else if (engine.getSystem(GameStateSystem.class).screenChange == GameStateSystem.SCREEN_NEXTCHAPTER) {
 			game.setScreen(new ChapterCompleteScreen(game, level, world.getNumberPages(), playerType));
-		}
-
-		if (engine.getSystem(GameStateSystem.class).nextScreenChange != GameStateSystem.SCREEN_NONE
-				&& InputManager.screenInput.get(0).isPointerDown() && InputManager.screenInput.get(0).isPointerDownLast()) {
-			doublespeed = true;
 		}
 	}
 

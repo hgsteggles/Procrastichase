@@ -43,7 +43,7 @@ public class TombstoneGame extends ApplicationAdapter {
 
 		GameArt.load(manager);
 
-		setScreen(new SplashScreen(this));
+		setScreen(new BufferScreen(this));
 	}
 
 	@Override
