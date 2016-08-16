@@ -95,6 +95,7 @@ public class TombstoneGame extends ApplicationAdapter {
 
 	@Override
 	public void resume() {
+
 		if (screen != null) {
 			screen.resume();
 		}

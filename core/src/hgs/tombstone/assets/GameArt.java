@@ -24,7 +24,7 @@ public class GameArt {
 	public static TextureRegion frameRing;
 	public static TextureRegion rip;
 
-	public static Texture backgroundStars;
+	public static TextureRegion backgroundStars;
 	public static TextureRegion sheeptext;
 	public static TextureRegion sheepstare;
 	public static TextureRegion sheepeye;
@@ -96,12 +96,10 @@ public class GameArt {
 	public static NinePatchDrawable buttonBorder;
 	public static NinePatchDrawable whiteButtonBorder;
 
-	private static Skin skin = new Skin();
-
 	public static void load(AssetManager manager) {
 		TextureAtlas atlas = manager.get("atlas/art.atlas", TextureAtlas.class);
 
-		backgroundStars = manager.get("bg-stars.png", Texture.class);
+		backgroundStars = new TextureRegion(manager.get("bg-stars.png", Texture.class));
 
 		soundOn = atlas.findRegion("sound-on");
 		soundOff = atlas.findRegion("sound-off");
@@ -255,6 +253,7 @@ public class GameArt {
 		selectCharButtonRight.flip(true, false);
 		buttonPixelart = atlas.findRegion("button-pixelart");
 
+		Skin skin = new Skin();
 		skin.addRegions(atlas);
 		buttonBorder = (NinePatchDrawable) skin.getDrawable("button-border");
 		whiteButtonBorder = (NinePatchDrawable) skin.getDrawable("white-button-border");

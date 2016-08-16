@@ -61,7 +61,7 @@ public class EntityFactory {
 		Entity entity = new Entity();
 
 		TextureComponent texComp = new TextureComponent();
-		texComp.region = new TextureRegion(GameArt.backgroundStars);
+		texComp.region = GameArt.backgroundStars;
 		texComp.size.x = 1.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionWidth();
 		texComp.size.y = 1.0f * RenderingSystem.PIXELS_TO_WORLD * texComp.region.getRegionHeight();
 		entity.add(texComp);

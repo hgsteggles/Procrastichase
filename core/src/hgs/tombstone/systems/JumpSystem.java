@@ -112,7 +112,8 @@ public class JumpSystem extends IteratingSystem {
 				StateComponent stateComp = ComponentMappers.state.get(e);
 				stateComp.set(stateComp.prevState);
 
-				ComponentMappers.jump.get(e).falling = false;
+				if (ComponentMappers.jump.has(e))
+					ComponentMappers.jump.get(e).falling = false;
 			}
 		};
 		tweenComp.tweenSpecs.add(tweenSpec);

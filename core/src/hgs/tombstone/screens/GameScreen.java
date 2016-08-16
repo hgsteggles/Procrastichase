@@ -58,8 +58,6 @@ public class GameScreen extends BasicScreen {
 
 	@Override
 	public void update(float delta) {
-		System.out.println(engine.getEntities().size());
-
 		if (doublespeed)
 			delta *= 4;
 		super.update(delta);
