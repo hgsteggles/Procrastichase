@@ -22,8 +22,8 @@ public class JumpSystem extends IteratingSystem {
 		StateComponent stateComp = ComponentMappers.state.get(entity);
 
 		if (stateComp.get() == PlayerState.JUMP.value() && !jumpComp.falling) {
-			if (stateComp.time > jumpComp.maxJumpTime
-					|| (!jumpComp.jumpHeld && stateComp.time > jumpComp.minJumpTime)) {
+			if (stateComp.time > jumpComp.maxJumpTime - 0.5 * jumpComp.minJumpTime
+					|| (!jumpComp.jumpHeld && stateComp.time > 0.5 * jumpComp.minJumpTime)) {
 				fall(entity);
 			}
 		}
@@ -38,7 +38,7 @@ public class JumpSystem extends IteratingSystem {
 		StateComponent stateComp = ComponentMappers.state.get(entity);
 		stateComp.set(PlayerState.JUMP.value());
 
-		final float T = 0.75f * jumpComp.minJumpTime;
+		final float T = 0.5f * jumpComp.minJumpTime;
 		final float y0 = 0.5f * BasicScreen.WORLD_HEIGHT - 0.5f;
 		final float H = 0.5f * BasicScreen.WORLD_HEIGHT + 0.5f;
 		final float u = 2.0f * (H - y0) / T;
@@ -76,7 +76,7 @@ public class JumpSystem extends IteratingSystem {
 		JumpComponent jumpComp = ComponentMappers.jump.get(entity);
 		jumpComp.falling = true;
 
-		final float T = 0.3f * jumpComp.minJumpTime;
+		final float T = 0.5f * jumpComp.minJumpTime;
 		final float y0 = 0.5f * BasicScreen.WORLD_HEIGHT - 0.5f;
 		final float H = 0.5f * BasicScreen.WORLD_HEIGHT + 0.5f;
 		final float u = 2.0f * (H - y0) / T;

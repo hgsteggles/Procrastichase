@@ -64,9 +64,6 @@ public class EndlessFinishScreen extends BasicScreen {
 			GameSettings.setEndlessRank(rank);
 		}
 
-		System.out.println(rank);
-		System.out.println(highscore);
-
 		add(createHighScoreMessage());
 
 		addMenuItem(BUTTONS_X, BUTTONS_Y, "CONTINUE", new ClickInterface() {

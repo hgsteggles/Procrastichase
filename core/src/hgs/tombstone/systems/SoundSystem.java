@@ -60,7 +60,6 @@ public class SoundSystem extends IteratingSystem implements EntityListener {
 		}
 		if (sc.loop) {
 			sc.soundID = sc.sound.loop(volume, sc.pitch, sc.pan);
-			System.out.println(sc.volume + " " + sc.soundID);
 		} else {
 			sc.soundID = sc.sound.play(volume, sc.pitch, sc.pan);
 		}

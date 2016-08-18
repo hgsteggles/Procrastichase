@@ -162,10 +162,9 @@ public class GameStateSystem extends EntitySystem {
 			MovementSystem.walkoff(player);
 			player.remove(JumpComponent.class);
 			player.remove(SlideComponent.class);
-
 			player.remove(CollisionComponent.class);
 			player.remove(ControlComponent.class);
-			player.remove(CollisionComponent.class);
+			player.remove(TweenComponent.class);
 		}
 		for (Entity boss : bosses) {
 			boss.remove(GunComponent.class);
@@ -205,7 +204,10 @@ public class GameStateSystem extends EntitySystem {
 			MovementComponent mc = ComponentMappers.movement.get(player);
 			mc.linearVelocity.x = 0;
 
-			player.remove(AnimationComponent.class);
+			StateComponent sc = ComponentMappers.state.get(player);
+			sc.time = 0;
+			sc.timescale = 0;
+
 			player.remove(CollisionComponent.class);
 			player.remove(ControlComponent.class);
 			player.remove(SlideComponent.class);

@@ -28,7 +28,6 @@ public class GameScreen extends BasicScreen {
 		add(new MovementSystem());
 		add(new ScrollSystem());
 		add(new TickerSystem());
-		add(new AnimationSystem());
 		add(new SoundSystem());
 		add(new JumpSystem());
 		add(new SlideSystem());
@@ -50,6 +49,9 @@ public class GameScreen extends BasicScreen {
 		add(new MusicSystem());
 		add(new EndlessSystem());
 		add(new DelaySystem());
+
+		add(new AnimationSystem());
+
 		//add(new DebugSystem(worldCamera));
 
 		world.populateLevel(engine, worldCamera);

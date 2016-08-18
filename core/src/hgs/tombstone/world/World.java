@@ -249,7 +249,7 @@ public class World {
 		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
 		ipos += 1f;
 		engine.addEntity(EntityFactory.createPage(ipos, false));
-		ipos += 1f;
+		ipos += 2f;
 		engine.addEntity(createOffsetThrownObject(BulletType.MILK, ipos));
 
 		ipos += 6;
@@ -314,10 +314,10 @@ public class World {
 		engine.addEntity(EntityFactory.createPin(ipos));
 		ipos += 2;
 		engine.addEntity(EntityFactory.createDrawers(ipos));
-		ipos += 1.75;
+		ipos += 1.9;
 		engine.addEntity(EntityFactory.createPage(ipos, false));
 		engine.addEntity(EntityFactory.createDrawers(ipos));
-		ipos += 1.75;
+		ipos += 1.9;
 		engine.addEntity(EntityFactory.createDrawers(ipos));
 		ipos += 2;
 		engine.addEntity(createOffsetThrownObject(BulletType.FIREBALL, ipos));
@@ -511,7 +511,7 @@ public class World {
 		tickComp.finish = new EventInterface() {
 			@Override
 			public void dispatchEvent(Entity e) {
-				e.add(ComponentFactory.createMiniBossGun());
+				e.add(ComponentFactory.createMiniBossGun(miniBoss));
 			}
 		};
 		entity.add(tickComp);

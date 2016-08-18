@@ -7,7 +7,7 @@ public class Enums {
 	public enum PlayerState {
 		IDLE(0), RUN(1), JUMP(2), SLIDE(3), DEAD(4);
 		private final int val;
-		private PlayerState(int val) {
+		PlayerState(int val) {
 			this.val = val;
 		}
 		public int value() {

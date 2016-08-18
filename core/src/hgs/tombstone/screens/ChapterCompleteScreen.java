@@ -43,7 +43,6 @@ public class ChapterCompleteScreen extends BasicScreen {
 		add(WorldUI.createBlackPageIcon(2.66f, BasicScreen.WORLD_HEIGHT / 2.0f - 0.0f));
 		add(createPageCount(2.66f, BasicScreen.WORLD_HEIGHT / 2.0f - 0.5f, npages, maxPages));
 		if (levelComplete < 3 || ((levelComplete != 4) && (npages == maxPages))) {
-			System.out.println(npages + " " + maxPages);
 			add(createContinueText("Press", 5.32f, BasicScreen.WORLD_HEIGHT / 2.0f + 0.0f));
 			add(createContinueText("to", 5.32f, BasicScreen.WORLD_HEIGHT / 2.0f - 0.25f));
 			add(createContinueText("Continue", 5.32f, BasicScreen.WORLD_HEIGHT / 2.0f - 0.5f));

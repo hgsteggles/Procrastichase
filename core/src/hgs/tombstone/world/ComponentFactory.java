@@ -93,9 +93,17 @@ public class ComponentFactory {
 		return gunComp;
 	}
 
-	public static GunComponent createMiniBossGun() {
+	public static GunComponent createMiniBossGun(Enums.MiniBossType who) {
 		GunComponent gunComp = new GunComponent();
-		gunComp.fireRate = 0.8f;
+		if (who == Enums.MiniBossType.IVA)
+			gunComp.fireRate = 0.8f;
+		else if (who == Enums.MiniBossType.GREG)
+			gunComp.fireRate = 1.0f;
+		else if (who == Enums.MiniBossType.ROB)
+			gunComp.fireRate = 1.0f;
+		else
+			gunComp.fireRate = 0.8f;
+
 		gunComp.shootInterface = new GunInterface() {
 			@Override
 			public void shoot(Entity e, Engine eng) {

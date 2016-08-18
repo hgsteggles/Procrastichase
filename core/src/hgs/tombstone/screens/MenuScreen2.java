@@ -86,7 +86,6 @@ public class MenuScreen2 extends BasicScreen {
 			@Override
 			public void onClick(Entity entity) {
 				GameSettings.setSoundOn(!GameSettings.isSoundOn());
-				System.out.println(ComponentMappers.texture.has(entity));
 				ComponentMappers.texture.get(entity).region = GameSettings.isSoundOn() ? GameArt.soundOn : GameArt.soundOff;
 			}
 		});
@@ -96,9 +95,6 @@ public class MenuScreen2 extends BasicScreen {
 				tournamentButtonDown();
 			}
 		});
-
-		if (!game.actionResolver.getSignedInGPGS())
-			game.actionResolver.loginGPGS();
 
 		//tournamentEntity = createTournamentEntity();
 		//add(tournamentEntity);
@@ -178,10 +174,10 @@ public class MenuScreen2 extends BasicScreen {
 		tickComp.finish = new EventInterface() {
 			@Override
 			public void dispatchEvent(Entity e) {
+				if (!game.actionResolver.getSignedInGPGS())
+					game.actionResolver.loginGPGS();
 				if (game.actionResolver.getSignedInGPGS())
 					game.actionResolver.getLeaderboardGPGS();
-				else
-					game.actionResolver.loginGPGS();
 
 				e.add(new RemovalComponent());
 			}
