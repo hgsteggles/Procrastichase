@@ -5,9 +5,8 @@ package hgs.tombstone.elements;
  */
 public class GameParameters {
 	public static float baseLevelSpeed = 3.5f;
-	public static float baseMinSlideTime = 0.2f;
-	public static float baseMaxSlideTime = 0.8f;
-	public static float baseMinJumpTime = 0.40f;
+	public static float baseSlideTime = 0.6f;
+	public static float baseMinJumpTime = 0.4f;
 	public static float baseMaxJumpTime = 0.6f;
 	public static float baseProjectileSpeed = 4.0f;
 	public static int baseEndPosX = 20;

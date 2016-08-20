@@ -42,7 +42,7 @@ public class EndlessFinishScreen extends BasicScreen {
 
 		if (game.actionResolver.getSignedInGPGS()) {
 			game.actionResolver.submitScoreGPGS(1000*time);
-			if (time >= 300)
+			if (time >= 240)
 				game.actionResolver.unlockAchievementGPGS("CgkI4qLb0q0bEAIQBQ");
 		}
 
@@ -127,7 +127,7 @@ public class EndlessFinishScreen extends BasicScreen {
 		else if (rank == 2)
 			fontComp.color.set(142f/255f, 142f/255f, 142f/255f, 1.0f);
 		else if (rank == 1)
-			fontComp.color.set(218f/255, 165f/255f, 32f, 1.0f);
+			fontComp.color.set(218f / 255f, 165f / 255f, 32f / 255f, 1.0f);
 
 		fontComp.centering = true;
 		fontComp.scale = 0.8f;

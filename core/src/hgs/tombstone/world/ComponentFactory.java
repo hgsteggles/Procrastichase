@@ -112,7 +112,7 @@ public class ComponentFactory {
 				GunComponent gc = ComponentMappers.gun.get(e);
 				MiniBossComponent mbc = ComponentMappers.miniboss.get(e);
 
-				float bulletVelocityX = mc.linearVelocity.x - gc.speed;
+				float bulletVelocityX = 2.0f * (mc.linearVelocity.x - gc.speed);
 
 				Entity bullet = BulletFactory.createMiniBossProjectile(mbc.who, tc.body.getPosition().x,
 						tc.body.getPosition().y, bulletVelocityX);

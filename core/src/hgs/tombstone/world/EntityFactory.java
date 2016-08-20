@@ -420,14 +420,7 @@ public class EntityFactory {
 		collComp.rect.height *= 1.0f / 3.0f;
 		collComp.type = Enums.CollisionType.ENEMY;
 
-		//entity.add(new PeeComponent());
-		BoundsComponent boundsComp = new BoundsComponent();
-		boundsComp.onEnter = new EventInterface() {
-			@Override
-			public void dispatchEvent(Entity e) {
-				e.add(ParticleFactory.createSleepEmitter(posX));
-			}
-		};
+		entity.add(ParticleFactory.createSleepEmitter(posX));
 
 		entity.add(new DisableComponent());
 

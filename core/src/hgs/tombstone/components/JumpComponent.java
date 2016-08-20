@@ -10,7 +10,6 @@ public class JumpComponent implements Component {
 	public float maxJumpTime = GameParameters.baseMaxJumpTime;
 	public float minJumpTime = GameParameters.baseMinJumpTime;
 	public boolean falling = false;
-	public boolean jumpHeld = false;
 	public boolean jumpReleased = true;
 	public int pointer = 0;
 }

@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import hgs.tombstone.components.*;
 import hgs.tombstone.elements.Enums;
+import hgs.tombstone.elements.GameParameters;
 import hgs.tombstone.world.EntityFactory;
 
 /**
@@ -20,26 +21,26 @@ public class EndlessSystem extends IteratingSystem {
 		GunComponent gunComp = ComponentMappers.gun.get(entity);
 		EndlessComponent endComp = ComponentMappers.endless.get(entity);
 
-		if (endComp.time >= 240)
-			gunComp.fireRate = 2.1f;
-		else if (endComp.time >= 210)
-			gunComp.fireRate = 2.0f;
+		float delay = 0.28f;
+
+		if (endComp.time >= 210)
+			delay = 0.08f;
 		else if (endComp.time >= 180)
-			gunComp.fireRate = 1.9f;
+			delay = 0.10f;
 		else if (endComp.time >= 150)
-			gunComp.fireRate = 1.8f;
+			delay = 0.12f;
 		else if (endComp.time >= 120)
-			gunComp.fireRate = 1.7f;
+			delay = 0.14f;
 		else if (endComp.time >= 90)
-			gunComp.fireRate = 1.6f;
+			delay = 0.17f;
 		else if (endComp.time >= 70)
-			gunComp.fireRate = 1.4f;
+			delay = 0.20f;
 		else if (endComp.time >= 50)
-			gunComp.fireRate = 1.3f;
+			delay = 0.23f;
 		else if (endComp.time >= 30)
-			gunComp.fireRate = 1.2f;
-		else
-			gunComp.fireRate = 1.0f;
+			delay = 0.26f;
+
+		gunComp.fireRate = 1.0f / (GameParameters.baseMaxJumpTime + delay);
 
 		endComp.time += deltaTime;
 	}

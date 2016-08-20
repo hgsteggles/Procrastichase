@@ -111,7 +111,6 @@ public class PlayerControlSystem extends EntitySystem {
 		for (Entity player : players) {
 			JumpComponent jumpComp = ComponentMappers.jump.get(player);
 			jumpComp.jumpReleased = true;
-			jumpComp.jumpHeld = false;
 		}
 	}
 
@@ -119,7 +118,6 @@ public class PlayerControlSystem extends EntitySystem {
 		for (Entity player : players) {
 			SlideComponent slideComp = ComponentMappers.slide.get(player);
 			slideComp.slideReleased = true;
-			slideComp.slideHeld = false;
 		}
 	}
 
@@ -156,12 +154,10 @@ public class PlayerControlSystem extends EntitySystem {
 
 			if (jumpComp.pointer == iptr) {
 				jumpComp.jumpReleased = true;
-				jumpComp.jumpHeld = false;
 				jumpComp.pointer = -1;
 			}
 			if (slideComp.pointer == iptr) {
 				slideComp.slideReleased = true;
-				slideComp.slideHeld = false;
 				slideComp.pointer = -1;
 			}
 		}

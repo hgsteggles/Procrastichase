@@ -265,7 +265,7 @@ public class ParticleFactory {
 		final float texH = 0.5f * 2.0f * emitComp.texregion.getRegionWidth() * RenderingSystem.PIXELS_TO_WORLD;
 		emitComp.texsize.set(texW, texH);
 
-		emitComp.velocity.set(0.0f, 1.5f);
+		emitComp.velocity.set(0.0f, 1.0f);
 
 		float height = 0.001f;
 		float width = 0.001f;
@@ -279,7 +279,7 @@ public class ParticleFactory {
 		emitComp.lifetime = 4.0f;
 		emitComp.lifetimeRange = 0.0f;
 		emitComp.intermittency = 0;
-		emitComp.rate = 2;
+		emitComp.rate = 1.8f;
 
 		emitComp.tweenInterface = new TweenInterface() {
 			@Override

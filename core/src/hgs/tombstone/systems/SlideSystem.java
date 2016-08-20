@@ -22,8 +22,7 @@ public class SlideSystem extends IteratingSystem {
 		StateComponent stateComp = ComponentMappers.state.get(entity);
 
 		if (stateComp.get() == PlayerState.SLIDE.value()) {
-			if (stateComp.time > slideComp.maxSlideTime
-					|| (!slideComp.slideHeld && stateComp.time > slideComp.minSlideTime)) {
+			if (stateComp.time > slideComp.slideTime) {
 				getUp(entity);
 			}
 		}
@@ -32,7 +31,6 @@ public class SlideSystem extends IteratingSystem {
 	static void slide(Entity entity, int pointer) {
 		SlideComponent slideComp = ComponentMappers.slide.get(entity);
 		slideComp.slideReleased = false;
-		slideComp.slideHeld = true;
 		slideComp.pointer = pointer;
 
 		StateComponent stateComp = ComponentMappers.state.get(entity);
@@ -44,7 +42,6 @@ public class SlideSystem extends IteratingSystem {
 
 	static void getUp(Entity entity) {
 		StateComponent stateComp = ComponentMappers.state.get(entity);
-
 		stateComp.set(stateComp.prevState);
 		CollisionComponent collComp = ComponentMappers.collision.get(entity);
 		if (collComp != null)
